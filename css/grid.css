@@ -621,19 +621,20 @@
         border-spacing: 0 !important;
         width: 100% !important;
         table-layout: fixed !important;
-        border: 0.75pt solid #000 !important;
+        border: none !important; /* Remove table border to prevent doubling */
         margin: 0 !important;
         background-color: #fff !important;
         box-shadow: none !important;
     }
     .notation-grid tr {
         border: none !important;
+        border-bottom: 0.75pt solid #000 !important; /* Explicitly ensure horizontal lines between rows */
     }
     .notation-grid td, .notation-grid th {
         border: 0.75pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: border-box !important;
+        background-clip: padding-box !important; /* Avoid covering borders */
         outline: none !important;
     }
 
@@ -660,11 +661,15 @@
         color: #000 !important;
         text-shadow: none !important;
     }
-    /* If it's a colored note, keep white text but without a stroke that ruins geometry */
+    /* If it's a colored note, restore the outline using a 4-way shadow to avoid geometry issues */
     td[class*="note-"] .cell-content {
         color: #fff !important;
         -webkit-text-stroke: 0 !important;
-        text-shadow: 0 0 1px #000 !important; /* Minimal shadow for legibility instead of stroke */
+        text-shadow: 
+            -1px -1px 0 #000,  
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000 !important;
     }
 
     .guitar-cell-wrapper, .cell-content {
