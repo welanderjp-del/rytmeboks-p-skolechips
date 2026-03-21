@@ -621,7 +621,7 @@
         border-spacing: 0 !important;
         width: 100% !important;
         table-layout: fixed !important;
-        border: 1pt solid #000 !important;
+        border: 0.75pt solid #000 !important;
         margin: 0 !important;
         background-color: #fff !important;
         box-shadow: none !important;
@@ -630,16 +630,16 @@
         border: none !important;
     }
     .notation-grid td, .notation-grid th {
-        border: 1pt solid #000 !important;
+        border: 0.75pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: padding-box !important;
+        background-clip: border-box !important;
         outline: none !important;
     }
 
     /* Ensure specific cells don't lose borders */
     .drum-label-cell, .marker-cell, .counter-row td {
-        border: 1pt solid #000 !important;
+        border: 0.75pt solid #000 !important;
     }
 
     .notation-grid td[class*="note-"] {
@@ -660,17 +660,18 @@
         color: #000 !important;
         text-shadow: none !important;
     }
-    /* If it's a colored note, keep white text but with a strong outline */
+    /* If it's a colored note, keep white text but without a stroke that ruins geometry */
     td[class*="note-"] .cell-content {
         color: #fff !important;
-        -webkit-text-stroke: 0.5pt #000 !important;
+        -webkit-text-stroke: 0 !important;
+        text-shadow: 0 0 1px #000 !important; /* Minimal shadow for legibility instead of stroke */
     }
 
     .guitar-cell-wrapper, .cell-content {
         background-color: transparent !important;
     }
     .drum-circle {
-        border: 2pt solid #000 !important;
+        border: 1.5pt solid #000 !important;
     }
     .cell-active .drum-circle {
         background-color: #000 !important;
