@@ -219,23 +219,25 @@
 @media print {
     .notation-grid {
         border-collapse: collapse !important;
+        border-spacing: 0 !important;
         width: 100% !important;
         table-layout: fixed !important;
-        border: none !important;
+        border: 0.5pt solid #000 !important;
         margin: 0 !important;
         background-color: #fff !important;
         box-shadow: none !important;
     }
     .notation-grid td, .notation-grid th {
-        border: 1pt solid #000 !important;
+        border: 0.5pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: border-box !important; /* Ensure background fills to the collapsed border */
+        background-clip: padding-box !important; /* Changed from border-box to prevent bleed */
+        outline: none !important;
     }
 
     /* Remove any specific cell borders that might interfere */
     .drum-label-cell {
-        border: 1pt solid #000 !important;
+        border: 0.5pt solid #000 !important;
     }
 
     .notation-grid td[class*="note-"] {
@@ -652,8 +654,8 @@
 
 .layout-grid .notation-grid td, 
 .layout-grid .notation-grid th {
-    border-width: 2.5px !important;
-    border-color: #666 !important;
+    border-width: 1px !important;
+    border-color: #000 !important;
 }
 
 .layout-grid .notation-grid .cell-content:focus {
