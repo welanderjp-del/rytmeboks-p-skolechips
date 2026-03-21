@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+    --grid-border: #141414;
+    --cell-bg: #ffffff;
+    --drum-label-bg: #e4e3e0;
+    --guitar-accent: #f27d26;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+[contenteditable]:focus {
+    outline: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+/* Print Styles */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    
+    body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        width: 210mm !important;
+    }
+    
+    #app-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        background: white !important;
+        display: block !important;
+        width: 210mm !important;
+    }
+    
+    .a4-page {
+        box-shadow: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    footer, .print\:hidden, .add-box-btn, .guitar-controls {
+        display: none !important;
+    }
+}
+
+.a4-page {
+    overflow: visible;
+}
+
+.rhythm-box-wrapper {
+    /* Margin is now controlled by the gap property of the container */
+}

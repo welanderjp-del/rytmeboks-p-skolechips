@@ -1,11 +1,18 @@
-<div align="center">
+# Rytme & Musik Notation
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Et moderne værktøj til musiknotation bygget med Vanilla JS.
 
-  <h1>Built with AI Studio</h2>
+## Funktioner
+- **Normal Mode**: Generel tekstnotation.
+- **Tromme Mode**: Trommemønstre med auto-skalerende labels.
+- **Guitar Mode**: Akkordnotation med understøttelse af omvendinger (inversions).
+- **Persistence**: Gemmer automatisk til localStorage og understøtter JSON eksport/import.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Arkitektur
+- Modulær JavaScript (ES Modules).
+- Centraliseret state management.
+- CSS-grid baseret layout.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
-
-</div>
+## Udvikling
+Appen bruger Vite som udviklingsserver.
+Kør `npm run dev` for at starte.

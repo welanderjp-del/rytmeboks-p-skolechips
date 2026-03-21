@@ -1,0 +1,81 @@
+.mode-drum .cell-content {
+    cursor: pointer;
+    user-select: none;
+    text-shadow: none;
+}
+
+.drum-circle {
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    border-radius: 50%;
+    display: none;
+}
+
+.mode-drum .cell-active .drum-circle {
+    display: block;
+}
+
+.mode-drum .cell-content:focus {
+    outline: none;
+}
+
+/* Hide instrument column in normal mode */
+.mode-normal .drum-label-cell {
+    display: none;
+}
+
+.mode-guitar .drum-label-cell {
+    display: none;
+}
+
+/* Guitar Mode */
+.guitar-cell-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.guitar-controls {
+    display: flex;
+    gap: 4px;
+    margin-top: 2px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.notation-grid td:hover .guitar-controls {
+    opacity: 1;
+}
+
+.guitar-btn {
+    background: #eee;
+    border: none;
+    border-radius: 2px;
+    padding: 0 4px;
+    cursor: pointer;
+    font-size: 10px;
+    color: #333;
+}
+
+.guitar-btn:hover {
+    background: #ddd;
+}
+
+.inversion-indicator {
+    font-size: 10px;
+    color: var(--guitar-accent);
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* Active Mode Button */
+#mode-selector button.active {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #000;
+}

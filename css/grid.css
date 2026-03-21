@@ -1,0 +1,699 @@
+.notation-grid {
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.notation-grid td, .notation-grid th {
+    border: 1px solid var(--grid-border);
+    width: 60px;
+    height: 50px;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.notation-grid .counter-row td {
+    height: 30px;
+    background: #f9f9f8;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #666;
+    user-select: none;
+}
+
+#mode-selector button.active, #time-selector button.active {
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #1c1917; /* stone-900 */
+}
+
+.notation-grid .cell-content:focus {
+    outline: 2px solid #3b82f6; /* blue-500 */
+    outline-offset: -2px;
+    background-color: rgba(59, 130, 246, 0.1);
+    z-index: 10;
+}
+
+.cell-content:empty:focus::before {
+    content: '';
+}
+
+.notation-grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.notation-grid .cell-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+    overflow: hidden;
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1;
+    color: white;
+    caret-color: transparent; /* Hide blinking cursor */
+    text-shadow: 
+        -1px -1px 0 var(--grid-border),  
+         1px -1px 0 var(--grid-border),
+        -1px  1px 0 var(--grid-border),
+         1px  1px 0 var(--grid-border);
+    transition: background-color 0.2s, font-size 0.1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.drum-circle {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--grid-border);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10; /* Ensure it's above the text */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+/* Disable focus highlight in drum mode */
+.mode-drum .cell-content:focus {
+    outline: none !important;
+    background-color: transparent !important;
+}
+
+.cell-active .drum-circle {
+    display: block;
+    background-color: var(--grid-border);
+}
+
+/* If cell is active but has text, maybe make circle just an outline? */
+/* Or just let the text shadow handle it. */
+
+.header-field-input {
+    caret-color: auto; /* Show cursor in header fields */
+    position: relative;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.header-field-input.is-empty::before {
+    content: attr(data-placeholder);
+    color: #ccc;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    pointer-events: none;
+}
+
+.a4-page {
+    box-sizing: border-box;
+    page-break-after: always;
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    background: white;
+    transform: translateZ(0);
+}
+
+.header-field-input[data-field="songTitle"] {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.header-field-input:focus {
+    outline: none;
+    background-color: #f9f9f8;
+}
+
+.page-header {
+    min-height: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 0.65rem;
+    border-bottom: 1px solid #e7e5e4; /* stone-200 */
+    padding-bottom: 0.1rem;
+}
+
+.is-dropdown-wrapper {
+    width: 120px;
+    height: 32px;
+    position: relative;
+}
+
+.is-dropdown-wrapper::after {
+    content: '▼';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    pointer-events: none;
+    z-index: 110;
+    color: #57534e; /* stone-600 */
+}
+
+.is-dropdown {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.is-dropdown button {
+    display: none;
+}
+
+.is-dropdown button.active {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: white;
+    padding-right: 24px; /* Space for arrow */
+}
+
+.is-dropdown:hover .flex, 
+.is-dropdown:hover {
+    display: flex;
+    flex-direction: column;
+    background: #e7e5e4; /* stone-200 */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.is-dropdown:hover {
+    position: absolute;
+    height: auto;
+    top: 0;
+    left: 0;
+}
+
+.is-dropdown:hover button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-radius: 0;
+    padding: 8px 12px;
+}
+
+.is-dropdown:hover button:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.is-dropdown:hover button:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+@media print {
+    .notation-grid {
+        border-collapse: collapse !important;
+        width: 100% !important;
+        table-layout: fixed !important;
+        border: none !important;
+        margin: 0 !important;
+        background-color: #fff !important;
+        box-shadow: none !important;
+    }
+    .notation-grid td, .notation-grid th {
+        border: 1pt solid #000 !important;
+        padding: 0 !important;
+        position: relative !important;
+        background-clip: border-box !important; /* Ensure background fills to the collapsed border */
+    }
+
+    /* Remove any specific cell borders that might interfere */
+    .drum-label-cell {
+        border: 1pt solid #000 !important;
+    }
+
+    .notation-grid td[class*="note-"] {
+        box-shadow: none !important;
+    }
+    
+    .notation-grid .counter-row td {
+        background-color: #f9f9f8 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .cell-content {
+        /* Match normal layout's text-shadow for consistent outline */
+        text-shadow: 
+            -1px -1px 0 #000,  
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000 !important;
+        -webkit-text-stroke: 0.5pt #000 !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .guitar-cell-wrapper, .cell-content {
+        background-color: transparent !important;
+    }
+    .drum-circle {
+        border-color: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .cell-active .drum-circle {
+        background-color: #000 !important;
+    }
+}
+
+/* Note Colors */
+.note-c { background-color: #D84C3E !important; }
+.note-cs, .note-db { background-color: #DE603E !important; }
+.note-d { background-color: #EA9F38 !important; }
+.note-ds, .note-eb { background-color: #F7CB45 !important; }
+.note-e { background-color: #FEF752 !important; }
+.note-f { background-color: #B8D242 !important; }
+.note-fs, .note-gb { background-color: #479B4D !important; }
+.note-g { background-color: #3D8A69 !important; }
+.note-gs, .note-ab { background-color: #2E6491 !important; }
+.note-a { background-color: #332D65 !important; }
+.note-as, .note-bb { background-color: #815084 !important; }
+.note-b, .note-h { background-color: #D15D92 !important; }
+
+/* Empty cell should not have shadow if no text */
+.cell-content:empty {
+    text-shadow: none;
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4px;
+}
+
+.formled-input {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #141414;
+    border-bottom: 1px solid transparent;
+    padding: 0px 4px;
+    min-width: 100px;
+    position: relative;
+}
+
+.formled-input.is-empty::before {
+    content: attr(data-placeholder);
+    color: #ccc;
+    position: absolute;
+    pointer-events: none;
+}
+
+@media print {
+    .formled-input.is-empty {
+        visibility: hidden !important;
+        display: block !important;
+        height: 1.5rem !important;
+    }
+    .box-header {
+        min-height: 1.5rem !important;
+        margin-bottom: 4px !important;
+        display: flex !important;
+    }
+    /* Hide hidden boxes in print but keep their space */
+    .rhythm-box-wrapper.is-hidden {
+        visibility: hidden !important;
+        background: transparent !important;
+        border: none !important;
+    }
+}
+
+.formled-input:hover {
+    border-bottom-color: #ccc;
+}
+
+.formled-input:focus {
+    border-bottom-color: var(--grid-border);
+    outline: none;
+}
+
+.box-controls {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.rhythm-box-wrapper:hover .box-controls,
+.rhythm-box-wrapper.is-hidden .box-controls {
+    opacity: 1;
+}
+
+.rhythm-box-wrapper.is-hidden .formled-wrapper,
+.rhythm-box-wrapper.is-hidden .notation-grid {
+    visibility: hidden;
+}
+
+.rhythm-box-wrapper.is-hidden {
+    background: rgba(0,0,0,0.02);
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+}
+
+.btn-icon.hide.active {
+    color: #3b82f6; /* blue-500 */
+}
+
+.btn-icon.hide:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    color: #999;
+    border-radius: 4px;
+}
+
+.btn-icon:hover {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.btn-icon.delete:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+/* Add Box Buttons on Hover */
+.add-box-btn {
+    position: absolute;
+    right: -40px;
+    width: 32px;
+    height: 32px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 25;
+    border: none;
+}
+
+.add-box-btn:hover {
+    transform: scale(1.1);
+    background: #059669;
+}
+
+.rhythm-box-wrapper:hover .add-box-btn {
+    opacity: 1;
+}
+
+.add-above {
+    top: -16px;
+}
+
+.add-below {
+    bottom: -16px;
+}
+
+/* Repeat Buttons */
+.repeat-btn {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s;
+    z-index: 20;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.rhythm-box-wrapper:hover .repeat-btn {
+    opacity: 1;
+}
+
+.repeat-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.repeat-btn.remove:hover {
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #ef4444;
+}
+
+.repeat-btn.remove:hover svg {
+    color: #ef4444;
+}
+
+.repeat-btn svg {
+    width: 18px;
+    height: 18px;
+    color: #6b7280;
+}
+
+/* Repeat Selection Mode */
+.repeat-selection-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+    cursor: pointer;
+    border: 2px dashed #3b82f6;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #3b82f6;
+    transition: background 0.2s;
+}
+
+.repeat-selection-overlay:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* Repeat Brackets */
+.repeat-bracket-container {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.repeat-bracket {
+    position: absolute;
+    border: 2px solid #000;
+    pointer-events: auto;
+    width: 15px;
+}
+
+.repeat-bracket.left {
+    border-right: none;
+}
+
+.repeat-bracket.right {
+    border-left: none;
+}
+
+.repeat-count-input {
+    position: absolute;
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 2px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    pointer-events: auto;
+    min-width: 30px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+}
+
+.repeat-count-input:focus {
+    outline: 2px solid #3b82f6;
+    border-color: transparent;
+}
+
+@media print {
+    .add-box-btn, .repeat-btn, .repeat-selection-overlay {
+        display: none !important;
+    }
+    .repeat-bracket {
+        border-width: 1.5pt !important;
+    }
+    .repeat-count-input {
+        border: none !important;
+        font-size: 11pt !important;
+    }
+}
+
+/* Marker fields */
+.drum-label-cell {
+    width: 120px;
+    height: 50px;
+    padding: 4px !important;
+    background: #f9f9f8;
+    border-right: 1px solid var(--grid-border) !important;
+}
+
+.drum-label-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    color: #444;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.1;
+    outline: none;
+}
+
+.notation-grid .marker-cell.left {
+    text-align: right;
+    padding-right: 8px;
+}
+
+.notation-grid .marker-cell.right {
+    text-align: left;
+    padding-left: 8px;
+}
+
+.notation-grid .marker-content {
+    width: 100%;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* Layout Grid Styles */
+.layout-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+    padding: 48px !important;
+}
+
+.page-grid-wrapper {
+    width: 73.5mm; /* 210mm * 0.35 */
+    height: 104mm; /* 297mm * 0.35 */
+    position: relative;
+    flex-shrink: 0;
+}
+
+.page-grid-wrapper .a4-page {
+    transform: scale(0.35);
+    transform-origin: top left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    user-select: none;
+    pointer-events: none; /* Disable interaction in grid view */
+    
+    /* Improve rendering quality when scaled */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    will-change: transform;
+    image-rendering: -webkit-optimize-contrast;
+    outline: 1px solid rgba(0,0,0,0.05);
+}
+
+.page-grid-wrapper:hover .a4-page {
+    transform: scale(0.37);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.2) !important;
+    z-index: 10;
+}
+
+.marker-cell.left .marker-content {
+    direction: rtl;
+}
+
+.layout-grid .notation-grid td, 
+.layout-grid .notation-grid th {
+    border-width: 2.5px !important;
+    border-color: #666 !important;
+}
+
+.layout-grid .notation-grid .cell-content:focus {
+    outline-width: 4px !important;
+}
+
+.layout-grid .drum-label-cell {
+    border-right-width: 1px !important;
+    border-color: #999 !important;
+}
+
+.layout-grid .drum-circle {
+    border-width: 4px !important;
+}
+
+.layout-grid .formled-input {
+    border-bottom-width: 1px !important;
+    border-color: transparent !important;
+}
+
+#btn-toggle-layout {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1) !important;
+    border: 2px solid white !important;
+    background-color: #292524 !important; /* stone-800 */
+    color: white !important;
+}
+
+.fixed.bottom-6.right-6 {
+    z-index: 999999 !important;
+    pointer-events: auto !important;
+}
+
+@media (max-width: 768px) {
+    .fixed.bottom-6.right-6 {
+        bottom: 2rem;
+        right: 2rem;
+    }
+    #btn-toggle-layout {
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.5rem;
+    }
+}

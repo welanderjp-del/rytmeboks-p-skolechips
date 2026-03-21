@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skolechips Rytmeboks</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/modes.css">
+</head>
+<body class="bg-stone-100 text-stone-900 min-h-screen flex flex-col">
+    <!-- Layout Toggle Button -->
+    <div class="fixed bottom-6 right-6 z-[999999] print:hidden">
+        <button id="btn-toggle-layout" class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl hover:bg-stone-700 transition-all active:scale-95" title="Skift layout">
+            🔲
+        </button>
+    </div>
+
+    <header class="px-4 py-2 bg-white border-b border-stone-300 flex flex-wrap justify-between items-center gap-4 shadow-sm sticky top-0 z-50 print:hidden">
+        <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+            <a href="https://skolechips.dk" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <img src="ikon.png" alt="Skolechips" class="h-12 w-auto" referrerPolicy="no-referrer">
+                <h1 class="text-xl font-bold text-stone-800">Rytmeboks</h1>
+            </a>
+            
+            <div class="is-dropdown-wrapper">
+                <div id="mode-selector" class="flex bg-stone-200 p-1 rounded-lg gap-1 is-dropdown">
+                    <button data-mode="normal" class="px-3 py-1 rounded-md transition-all text-sm font-medium">Normal</button>
+                    <button data-mode="drum" class="px-3 py-1 rounded-md transition-all text-sm font-medium">Trommer</button>
+                    <button data-mode="guitar" class="px-3 py-1 rounded-md transition-all text-sm font-medium">Guitar</button>
+                </div>
+            </div>
+
+            <div class="is-dropdown-wrapper">
+                <div id="time-selector" class="flex bg-stone-200 p-1 rounded-lg gap-1 is-dropdown">
+                    <button data-sig="4/4" class="px-3 py-1 rounded-md transition-all text-xs font-medium">4/4</button>
+                    <button data-sig="4/4+" class="px-3 py-1 rounded-md transition-all text-xs font-medium">4/4+</button>
+                    <button data-sig="3/4" class="px-3 py-1 rounded-md transition-all text-xs font-medium">3/4</button>
+                    <button data-sig="3/4+" class="px-3 py-1 rounded-md transition-all text-xs font-medium">3/4+</button>
+                    <button data-sig="6/8" class="px-3 py-1 rounded-md transition-all text-xs font-medium">6/8</button>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 bg-stone-200 p-1 rounded-lg">
+                <span class="text-xs font-medium px-2">Rækker:</span>
+                <input type="number" id="global-rows-input" min="1" max="12" value="1" class="w-12 bg-white rounded border-none text-sm px-1 py-0.5 focus:ring-1 focus:ring-stone-400">
+            </div>
+        </div>
+        
+        <div class="flex gap-2">
+            <button id="btn-reset" class="px-3 py-1 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Nulstil</button>
+            <button id="btn-print" class="px-3 py-1 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition-colors flex items-center gap-1">
+                🖨️ Print
+            </button>
+            <button id="btn-export" class="px-3 py-1 bg-stone-800 text-white rounded-md text-sm hover:bg-stone-700 transition-colors">Eksportér</button>
+            <button id="btn-import" class="px-3 py-1 bg-stone-200 text-stone-800 rounded-md text-sm hover:bg-stone-300 transition-colors">Importér</button>
+            <input type="file" id="file-input" class="hidden" accept=".json">
+        </div>
+    </header>
+
+    <main id="app-container" class="flex-1 overflow-auto p-8 flex flex-col items-center bg-stone-200 print:bg-white print:p-0">
+        <!-- A4 Pages will be rendered here dynamically -->
+    </main>
+
+    <footer class="p-4 bg-stone-50 border-t border-stone-200 text-xs text-stone-500 flex justify-between">
+        <div>Rytmeboks v1.0</div>
+        <div id="status-indicator">Gemt lokalt</div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
