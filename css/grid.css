@@ -617,30 +617,34 @@
         box-sizing: border-box !important;
     }
     .notation-grid {
-        border-collapse: collapse !important;
+        border-collapse: separate !important;
         border-spacing: 0 !important;
         width: 100% !important;
         table-layout: fixed !important;
-        border: none !important; /* Remove table border to prevent doubling */
+        border-top: 0.75pt solid #000 !important;
+        border-left: 0.75pt solid #000 !important;
         margin: 0 !important;
         background-color: #fff !important;
         box-shadow: none !important;
     }
     .notation-grid tr {
         border: none !important;
-        border-bottom: 0.75pt solid #000 !important; /* Explicitly ensure horizontal lines between rows */
     }
     .notation-grid td, .notation-grid th {
-        border: 0.75pt solid #000 !important;
+        border: none !important;
+        border-bottom: 0.75pt solid #000 !important;
+        border-right: 0.75pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: padding-box !important; /* Avoid covering borders */
+        background-clip: padding-box !important;
         outline: none !important;
     }
 
-    /* Ensure specific cells don't lose borders */
+    /* Ensure specific cells follow the same border logic */
     .drum-label-cell, .marker-cell, .counter-row td {
-        border: 0.75pt solid #000 !important;
+        border: none !important;
+        border-bottom: 0.75pt solid #000 !important;
+        border-right: 0.75pt solid #000 !important;
     }
 
     .notation-grid td[class*="note-"] {
@@ -652,24 +656,19 @@
     }
     .cell-content {
         text-shadow: none !important;
-        -webkit-text-stroke: 0 !important;
         color: white !important;
-        font-weight: 800 !important;
+        font-weight: 900 !important;
+        /* Use stroke with paint-order to preserve geometry while having a strong outline */
+        -webkit-text-stroke: 1.5pt #000 !important;
+        paint-order: stroke fill !important;
     }
     /* Black text for better print contrast in non-colored cells */
     .cell-content:not(:empty) {
-        color: #000 !important;
-        text-shadow: none !important;
+        /* If it's not a note cell, we might want black text, but let's keep the outline for consistency */
     }
-    /* If it's a colored note, restore the outline using a 4-way shadow to avoid geometry issues */
+    /* Ensure note cells have white text with black outline */
     td[class*="note-"] .cell-content {
         color: #fff !important;
-        -webkit-text-stroke: 0 !important;
-        text-shadow: 
-            -1px -1px 0 #000,  
-             1px -1px 0 #000,
-            -1px  1px 0 #000,
-             1px  1px 0 #000 !important;
     }
 
     .guitar-cell-wrapper, .cell-content {
