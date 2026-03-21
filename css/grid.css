@@ -216,64 +216,6 @@
     border-radius: 0 0 8px 8px;
 }
 
-@media print {
-    .notation-grid {
-        border-collapse: collapse !important;
-        border-spacing: 0 !important;
-        width: 100% !important;
-        table-layout: fixed !important;
-        border: 0.5pt solid #000 !important;
-        margin: 0 !important;
-        background-color: #fff !important;
-        box-shadow: none !important;
-    }
-    .notation-grid td, .notation-grid th {
-        border: 0.5pt solid #000 !important;
-        padding: 0 !important;
-        position: relative !important;
-        background-clip: padding-box !important; /* Changed from border-box to prevent bleed */
-        outline: none !important;
-    }
-
-    /* Remove any specific cell borders that might interfere */
-    .drum-label-cell {
-        border: 0.5pt solid #000 !important;
-    }
-
-    .notation-grid td[class*="note-"] {
-        box-shadow: none !important;
-    }
-    
-    .notation-grid .counter-row td {
-        background-color: #f9f9f8 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-    .cell-content {
-        /* Match normal layout's text-shadow for consistent outline */
-        text-shadow: 
-            -1px -1px 0 #000,  
-             1px -1px 0 #000,
-            -1px  1px 0 #000,
-             1px  1px 0 #000 !important;
-        -webkit-text-stroke: 0.5pt #000 !important;
-        color: white !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-    .guitar-cell-wrapper, .cell-content {
-        background-color: transparent !important;
-    }
-    .drum-circle {
-        border-color: #000 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-    .cell-active .drum-circle {
-        background-color: #000 !important;
-    }
-}
-
 /* Note Colors */
 .note-c { background-color: #D84C3E !important; }
 .note-cs, .note-db { background-color: #DE603E !important; }
@@ -315,25 +257,6 @@
     color: #ccc;
     position: absolute;
     pointer-events: none;
-}
-
-@media print {
-    .formled-input.is-empty {
-        visibility: hidden !important;
-        display: block !important;
-        height: 1.5rem !important;
-    }
-    .box-header {
-        min-height: 1.5rem !important;
-        margin-bottom: 4px !important;
-        display: flex !important;
-    }
-    /* Hide hidden boxes in print but keep their space */
-    .rhythm-box-wrapper.is-hidden {
-        visibility: hidden !important;
-        background: transparent !important;
-        border: none !important;
-    }
 }
 
 .formled-input:hover {
@@ -548,19 +471,6 @@
     border-color: transparent;
 }
 
-@media print {
-    .add-box-btn, .repeat-btn, .repeat-selection-overlay {
-        display: none !important;
-    }
-    .repeat-bracket {
-        border-width: 1.5pt !important;
-    }
-    .repeat-count-input {
-        border: none !important;
-        font-size: 11pt !important;
-    }
-}
-
 /* Marker fields */
 .drum-label-cell {
     width: 120px;
@@ -697,5 +607,99 @@
         width: 4rem;
         height: 4rem;
         font-size: 1.5rem;
+    }
+}
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-sizing: border-box !important;
+    }
+    .notation-grid {
+        border-collapse: collapse !important;
+        border-spacing: 0 !important;
+        width: 100% !important;
+        table-layout: fixed !important;
+        border: 1pt solid #000 !important;
+        margin: 0 !important;
+        background-color: #fff !important;
+        box-shadow: none !important;
+    }
+    .notation-grid tr {
+        border: none !important;
+    }
+    .notation-grid td, .notation-grid th {
+        border: 1pt solid #000 !important;
+        padding: 0 !important;
+        position: relative !important;
+        background-clip: padding-box !important;
+        outline: none !important;
+    }
+
+    /* Ensure specific cells don't lose borders */
+    .drum-label-cell, .marker-cell, .counter-row td {
+        border: 1pt solid #000 !important;
+    }
+
+    .notation-grid td[class*="note-"] {
+        box-shadow: none !important;
+    }
+    
+    .notation-grid .counter-row td {
+        background-color: #f9f9f8 !important;
+    }
+    .cell-content {
+        text-shadow: none !important;
+        -webkit-text-stroke: 0 !important;
+        color: white !important;
+        font-weight: 800 !important;
+    }
+    /* Black text for better print contrast in non-colored cells */
+    .cell-content:not(:empty) {
+        color: #000 !important;
+        text-shadow: none !important;
+    }
+    /* If it's a colored note, keep white text but with a strong outline */
+    td[class*="note-"] .cell-content {
+        color: #fff !important;
+        -webkit-text-stroke: 0.5pt #000 !important;
+    }
+
+    .guitar-cell-wrapper, .cell-content {
+        background-color: transparent !important;
+    }
+    .drum-circle {
+        border: 2pt solid #000 !important;
+    }
+    .cell-active .drum-circle {
+        background-color: #000 !important;
+    }
+    
+    /* Hide hidden boxes in print but keep their space */
+    .rhythm-box-wrapper.is-hidden {
+        visibility: hidden !important;
+        background: transparent !important;
+        border: none !important;
+    }
+    .box-header {
+        min-height: 1.5rem !important;
+        margin-bottom: 4px !important;
+        display: flex !important;
+    }
+    .formled-input.is-empty {
+        visibility: hidden !important;
+        display: block !important;
+        height: 1.5rem !important;
+    }
+    .add-box-btn, .repeat-btn, .repeat-selection-overlay {
+        display: none !important;
+    }
+    .repeat-bracket {
+        border-width: 1.5pt !important;
+    }
+    .repeat-count-input {
+        border: none !important;
+        font-size: 11pt !important;
     }
 }
