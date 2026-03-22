@@ -562,10 +562,14 @@
     direction: rtl;
 }
 
+.layout-grid .notation-grid {
+    border-collapse: collapse !important;
+    border: 1.5px solid #000 !important;
+}
+
 .layout-grid .notation-grid td, 
 .layout-grid .notation-grid th {
-    border-width: 1px !important;
-    border-color: #000 !important;
+    border: 1.5px solid #000 !important;
 }
 
 .layout-grid .notation-grid .cell-content:focus {
@@ -573,8 +577,7 @@
 }
 
 .layout-grid .drum-label-cell {
-    border-right-width: 1px !important;
-    border-color: #999 !important;
+    border-right: 1.5px solid #000 !important;
 }
 
 .layout-grid .drum-circle {
@@ -707,5 +710,45 @@
     .repeat-count-input {
         border: none !important;
         font-size: 11pt !important;
+    }
+
+    /* Special handling for Grid Layout (Zoomed Out) */
+    .layout-grid {
+        display: grid !important;
+        grid-template-columns: 105mm 105mm !important;
+        grid-auto-rows: 148.5mm !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        background: white !important;
+    }
+
+    .layout-grid .page-grid-wrapper {
+        width: 105mm !important;
+        height: 148.5mm !important;
+        page-break-inside: avoid !important;
+        position: relative !important;
+        overflow: hidden !important;
+        display: block !important;
+        border: 0.1pt solid #eee !important; /* Subtle cutting guide */
+    }
+
+    .layout-grid .page-grid-wrapper .a4-page {
+        transform: scale(0.5) !important;
+        transform-origin: top left !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        page-break-after: auto !important;
+    }
+
+    /* Force page break after every 4 pages */
+    .layout-grid .page-grid-wrapper:nth-child(4n) {
+        page-break-after: always !important;
     }
 }
