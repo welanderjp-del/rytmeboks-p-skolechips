@@ -714,25 +714,23 @@
 
     /* Special handling for Grid Layout (Zoomed Out) */
     .layout-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 105mm) !important;
-        grid-auto-rows: 148.5mm !important;
-        gap: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        display: block !important;
         width: 210mm !important;
         max-width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
         background: white !important;
         overflow: visible !important;
     }
 
     .layout-grid .page-grid-wrapper {
+        display: block !important;
+        float: left !important;
         width: 105mm !important;
         height: 148.5mm !important;
         page-break-inside: avoid !important;
         position: relative !important;
         overflow: hidden !important;
-        display: block !important;
         box-sizing: border-box !important;
         border: 0.1pt solid #eee !important; /* Subtle cutting guide */
     }
@@ -751,8 +749,33 @@
         page-break-after: auto !important;
     }
 
+    /* Thicker borders for zoomed out print to prevent disappearing lines */
+    .layout-grid .notation-grid {
+        border-top: 1.5pt solid #000 !important;
+        border-left: 1.5pt solid #000 !important;
+    }
+    
+    .layout-grid .notation-grid td, 
+    .layout-grid .notation-grid th,
+    .layout-grid .drum-label-cell, 
+    .layout-grid .marker-cell, 
+    .layout-grid .counter-row td {
+        border-bottom: 1.5pt solid #000 !important;
+        border-right: 1.5pt solid #000 !important;
+    }
+
     /* Force page break after every 4 pages */
     .layout-grid .page-grid-wrapper:nth-child(4n) {
         page-break-after: always !important;
+        clear: both !important;
+    }
+    
+    /* Ensure clear after every 2 pages to maintain grid rows */
+    .layout-grid .page-grid-wrapper:nth-child(2n) {
+        page-break-after: auto !important;
+    }
+    
+    .layout-grid .page-grid-wrapper:nth-child(2n+1) {
+        clear: left !important;
     }
 }
