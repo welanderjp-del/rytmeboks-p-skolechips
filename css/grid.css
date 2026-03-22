@@ -636,7 +636,7 @@
         border-right: 0.75pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: padding-box !important;
+        background-clip: border-box !important; /* Extend background under border to eliminate white gaps */
         outline: none !important;
     }
 
@@ -645,6 +645,7 @@
         border: none !important;
         border-bottom: 0.75pt solid #000 !important;
         border-right: 0.75pt solid #000 !important;
+        background-clip: border-box !important;
     }
 
     .notation-grid td[class*="note-"] {
