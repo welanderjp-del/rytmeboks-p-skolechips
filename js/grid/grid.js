@@ -16,13 +16,13 @@ export function renderGrid() {
     const pages = [];
     let currentPage = [];
     let currentHeight = 0;
-    const PAGE_HEIGHT_LIMIT = 890; // Increased to accommodate larger gaps while fitting 8 single-row boxes
+    const PAGE_HEIGHT_LIMIT = 910; // Increased to be more accurate to A4 internal height
     
     state.boxes.forEach((box, index) => {
         const isFirstOnPage = currentPage.length === 0;
-        // More generous box height estimates to prevent overflow:
-        // Header/Formled area (~32px) + Counter (30px if first on page) + Rows (50px each)
-        const boxHeight = (isFirstOnPage ? 62 : 32) + (box.rows * 50);
+        // More accurate height estimates:
+        // Header/Formled area (~32px) + Page Header (60px if first on page) + Counter (30px if first on page) + Rows (50px each)
+        const boxHeight = (isFirstOnPage ? 90 : 32) + (box.rows * 50);
         const boxWithIndex = { ...box, globalIndex: index };
         
         // Add dynamic gap to height calculation
