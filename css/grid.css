@@ -727,7 +727,7 @@
         display: block !important;
         float: left !important;
         width: 105mm !important;
-        height: 148.5mm !important;
+        height: 147.5mm !important; /* Slightly less than half (148.5mm) to avoid rounding/margin issues in print */
         page-break-inside: avoid !important;
         position: relative !important;
         overflow: hidden !important;
@@ -771,10 +771,6 @@
     }
     
     /* Ensure clear after every 2 pages to maintain grid rows */
-    .layout-grid .page-grid-wrapper:nth-child(2n) {
-        page-break-after: auto !important;
-    }
-    
     .layout-grid .page-grid-wrapper:nth-child(2n+1) {
         clear: left !important;
     }
