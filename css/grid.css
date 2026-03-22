@@ -726,8 +726,8 @@
     .layout-grid .page-grid-wrapper {
         display: block !important;
         float: left !important;
-        width: 105mm !important;
-        height: 147.5mm !important; /* Slightly less than half (148.5mm) to avoid rounding/margin issues in print */
+        width: 104.5mm !important; /* Slightly less than 105mm to avoid overflow */
+        height: 147mm !important; /* Slightly less than half (148.5mm) to avoid rounding/margin issues in print */
         page-break-inside: avoid !important;
         position: relative !important;
         overflow: hidden !important;
@@ -767,7 +767,7 @@
     /* Force page break after every 4 pages */
     .layout-grid .page-grid-wrapper:nth-child(4n) {
         page-break-after: always !important;
-        clear: both !important;
+        break-after: page !important;
     }
     
     /* Ensure clear after every 2 pages to maintain grid rows */
