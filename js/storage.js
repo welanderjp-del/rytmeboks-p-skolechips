@@ -51,7 +51,15 @@ export function exportToJSON() {
     const dataStr = JSON.stringify(dataToExport, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
     
-    const exportFileDefaultName = `${(state.songTitle || state.title).replace(/\s+/g, '_')}_notation.json`;
+    const filenameParts = [];
+    if (state.songTitle) filenameParts.push(state.songTitle);
+    if (state.instrument) filenameParts.push(state.instrument);
+    
+    const filename = filenameParts.length > 0 
+        ? filenameParts.join(' - ') 
+        : (state.title || "Rytmeboks");
+    
+    const exportFileDefaultName = `${filename.replace(/[\\/:*?"<>|]/g, '_')}.json`;
     
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
