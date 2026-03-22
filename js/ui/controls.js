@@ -90,7 +90,7 @@ export function initUI() {
     fileInput.addEventListener('change', async (e) => {
         if (e.target.files.length > 0) {
             await importFromJSON(e.target.files[0]);
-            location.reload();
+            // The statechange listener will handle re-rendering
         }
     });
 
