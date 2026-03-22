@@ -1,0 +1,329 @@
+{
+  "svg_config": {
+    "point_fill": "white",
+    "point_stroke": "black",
+    "line_color": "black"
+  },
+  "guitar_mode": {
+    "C_Major": {
+      "aliases": ["C", "C-dur", "Cdur", "Cmaj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 3, 2, 0, 1, 0], "label_below": "C", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "standard", "frets": [8, 10, 10, 9, 8, 8], "label_below": "C (barré)", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 3, 5, 5, "x", "x"], "label_below": "C5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [3, 3, 5, "x", "x", "x"], "label_below": "C5/G", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 0, 1, 0], "label_below": "C", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 5, 5, 3], "label_below": "C", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "C_Minor": {
+      "aliases": ["Cm", "C-mol", "Cmol", "Cmin"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 3, 5, 5, 4, 3], "label_below": "Cm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 3, 5, 5, "x", "x"], "label_below": "C5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [3, 3, 5, "x", "x", "x"], "label_below": "C5/G", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 5, 4, 3], "label_below": "Cm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 8, 8, 8], "label_below": "Cm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Cs_Major": {
+      "aliases": ["C#", "C#-dur", "C#dur", "C#maj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 4, 6, 6, 6, 4], "label_below": "C#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 4, 6, 6, "x", "x"], "label_below": "C#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [4, 4, 6, "x", "x", "x"], "label_below": "C#5/G#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 6, 6, 4], "label_below": "C#", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Cs_Minor": {
+      "aliases": ["C#m", "C#-mol", "C#mol", "C#min"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 4, 6, 6, 5, 4], "label_below": "C#m", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 4, 6, 6, "x", "x"], "label_below": "C#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [4, 4, 6, "x", "x", "x"], "label_below": "C#5/G#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 6, 5, 4], "label_below": "C#m", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Db_Major": {
+      "aliases": ["Db", "Db-dur", "Dbdur", "Dbmaj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 4, 6, 6, 6, 4], "label_below": "Db", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 4, 6, 6, "x", "x"], "label_below": "Db5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [4, 4, 6, "x", "x", "x"], "label_below": "Db5/Ab", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 6, 6, 4], "label_below": "Db", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Db_Minor": {
+      "aliases": ["Dbm", "Db-mol", "Dbmol", "Dbmin"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 4, 6, 6, 5, 4], "label_below": "Dbm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 4, 6, 6, "x", "x"], "label_below": "Db5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [4, 4, 6, "x", "x", "x"], "label_below": "Db5/Ab", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 6, 5, 4], "label_below": "Dbm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "D_Major": {
+      "aliases": ["D", "D-dur", "Ddur", "Dmaj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", "x", 0, 2, 3, 2], "label_below": "D", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "standard", "frets": [10, 12, 12, 11, 10, 10], "label_below": "D (barré)", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 5, 7, 7, "x", "x"], "label_below": "D5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [5, 5, 7, "x", "x", "x"], "label_below": "D5/A", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 3, 2], "label_below": "D", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 7, 7, 5], "label_below": "D", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "D_Minor": {
+      "aliases": ["Dm", "D-mol", "Dmol", "Dmin"],
+      "variations": [
+        { "type": "standard", "frets": ["x", "x", 0, 2, 3, 1], "label_below": "Dm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 5, 7, 7, "x", "x"], "label_below": "D5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [5, 5, 7, "x", "x", "x"], "label_below": "D5/A", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 3, 1], "label_below": "Dm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 10, 10, 10], "label_below": "Dm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Ds_Major": {
+      "aliases": ["D#", "D#-dur", "D#dur", "D#maj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 6, 8, 8, 8, 6], "label_below": "D#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 6, 8, 8, "x", "x"], "label_below": "D#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [6, 6, 8, "x", "x", "x"], "label_below": "D#5/A#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 8, 8, 6], "label_below": "D#", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Ds_Minor": {
+      "aliases": ["D#m", "D#-mol", "D#mol", "D#min"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 6, 8, 8, 7, 6], "label_below": "D#m", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 6, 8, 8, "x", "x"], "label_below": "D#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [6, 6, 8, "x", "x", "x"], "label_below": "D#5/A#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 8, 7, 6], "label_below": "D#m", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Eb_Major": {
+      "aliases": ["Eb", "Eb-dur", "Ebdur", "Ebmaj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 6, 8, 8, 8, 6], "label_below": "Eb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 6, 8, 8, "x", "x"], "label_below": "Eb5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [6, 6, 8, "x", "x", "x"], "label_below": "Eb5/Bb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 8, 8, 6], "label_below": "Eb", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Eb_Minor": {
+      "aliases": ["Ebm", "Eb-mol", "Ebmol", "Ebmin"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 6, 8, 8, 7, 6], "label_below": "Ebm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 6, 8, 8, "x", "x"], "label_below": "Eb5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [6, 6, 8, "x", "x", "x"], "label_below": "Eb5/Bb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 8, 7, 6], "label_below": "Ebm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "E_Major": {
+      "aliases": ["E", "E-dur", "Edur", "Emaj"],
+      "variations": [
+        { "type": "standard", "frets": [0, 2, 2, 1, 0, 0], "label_below": "E", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [0, 2, 2, "x", "x", "x"], "label_below": "E5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 7, 9, 9, "x", "x"], "label_below": "E5/B", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [7, 7, 9, "x", "x", "x"], "label_below": "E5/B", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 1, 0, 0], "label_below": "E", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 9, 9, 7], "label_below": "E", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "E_Minor": {
+      "aliases": ["Em", "E-mol", "Emol", "Emin"],
+      "variations": [
+        { "type": "standard", "frets": [0, 2, 2, 0, 0, 0], "label_below": "Em", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [0, 2, 2, "x", "x", "x"], "label_below": "E5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 7, 9, 9, "x", "x"], "label_below": "E5/B", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [7, 7, 9, "x", "x", "x"], "label_below": "E5/B", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 0, 0, 0], "label_below": "Em", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 12, 12, 12], "label_below": "Em", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "F_Major": {
+      "aliases": ["F", "F-dur", "Fdur", "Fmaj"],
+      "variations": [
+        { "type": "standard", "frets": [1, 3, 3, 2, 1, 1], "label_below": "F", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [1, 3, 3, "x", "x", "x"], "label_below": "F5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 8, 10, 10, "x", "x"], "label_below": "F5/C", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [8, 8, 10, "x", "x", "x"], "label_below": "F5/C", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 1, 1], "label_below": "F", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 10, 10, 8], "label_below": "F", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "F_Minor": {
+      "aliases": ["Fm", "F-mol", "Fmol", "Fmin"],
+      "variations": [
+        { "type": "standard", "frets": [1, 3, 3, 1, 1, 1], "label_below": "Fm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [1, 3, 3, "x", "x", "x"], "label_below": "F5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 8, 10, 10, "x", "x"], "label_below": "F5/C", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [8, 8, 10, "x", "x", "x"], "label_below": "F5/C", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 1, 1, 1], "label_below": "Fm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 13, 13, 13], "label_below": "Fm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Fs_Major": {
+      "aliases": ["F#", "F#-dur", "F#dur", "F#maj"],
+      "variations": [
+        { "type": "standard", "frets": [2, 4, 4, 3, 2, 2], "label_below": "F#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [2, 4, 4, "x", "x", "x"], "label_below": "F#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 9, 11, 11, "x", "x"], "label_below": "F#5/C#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [9, 9, 11, "x", "x", "x"], "label_below": "F#5/C#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 3, 2, 2], "label_below": "F#", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Fs_Minor": {
+      "aliases": ["F#m", "F#-mol", "F#mol", "F#min"],
+      "variations": [
+        { "type": "standard", "frets": [2, 4, 4, 2, 2, 2], "label_below": "F#m", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [2, 4, 4, "x", "x", "x"], "label_below": "F#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 9, 11, 11, "x", "x"], "label_below": "F#5/C#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [9, 9, 11, "x", "x", "x"], "label_below": "F#5/C#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 2, 2], "label_below": "F#m", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Gb_Major": {
+      "aliases": ["Gb", "Gb-dur", "Gbdur", "Gbmaj"],
+      "variations": [
+        { "type": "standard", "frets": [2, 4, 4, 3, 2, 2], "label_below": "Gb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [2, 4, 4, "x", "x", "x"], "label_below": "Gb5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 9, 11, 11, "x", "x"], "label_below": "Gb5/Db", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 3, 2, 2], "label_below": "Gb", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Gb_Minor": {
+      "aliases": ["Gbm", "Gb-mol", "Gbmol", "Gbmin"],
+      "variations": [
+        { "type": "standard", "frets": [2, 4, 4, 2, 2, 2], "label_below": "Gbm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [2, 4, 4, "x", "x", "x"], "label_below": "Gb5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 9, 11, 11, "x", "x"], "label_below": "Gb5/Db", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 2, 2], "label_below": "Gbm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "G_Major": {
+      "aliases": ["G", "G-dur", "Gdur", "Gmaj"],
+      "variations": [
+        { "type": "standard", "frets": [3, 2, 0, 0, 0, 3], "label_below": "G", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [3, 5, 5, "x", "x", "x"], "label_below": "G5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 10, 12, 12, "x", "x"], "label_below": "G5/D", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [10, 10, 12, "x", "x", "x"], "label_below": "G5/D", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 0, 0, 3], "label_below": "G", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 12, 12, 10], "label_below": "G", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "G_Minor": {
+      "aliases": ["Gm", "G-mol", "Gmol", "Gmin"],
+      "variations": [
+        { "type": "standard", "frets": [3, 5, 5, 3, 3, 3], "label_below": "Gm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [3, 5, 5, "x", "x", "x"], "label_below": "G5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 10, 12, 12, "x", "x"], "label_below": "G5/D", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [10, 10, 12, "x", "x", "x"], "label_below": "G5/D", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 3, 3, 3], "label_below": "Gm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 15, 15, 15], "label_below": "Gm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Gs_Major": {
+      "aliases": ["G#", "G#-dur", "G#dur", "G#maj"],
+      "variations": [
+        { "type": "standard", "frets": [4, 6, 6, 5, 4, 4], "label_below": "G#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [4, 6, 6, "x", "x", "x"], "label_below": "G#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 11, 13, 13, "x", "x"], "label_below": "G#5/D#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [11, 11, 13, "x", "x", "x"], "label_below": "G#5/D#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 5, 4, 4], "label_below": "G#", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Gs_Minor": {
+      "aliases": ["G#m", "G#-mol", "G#mol", "G#min"],
+      "variations": [
+        { "type": "standard", "frets": [4, 6, 6, 4, 4, 4], "label_below": "G#m", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [4, 6, 6, "x", "x", "x"], "label_below": "G#5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 11, 13, 13, "x", "x"], "label_below": "G#5/D#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [11, 11, 13, "x", "x", "x"], "label_below": "G#5/D#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 4, 4, 4], "label_below": "G#m", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Ab_Major": {
+      "aliases": ["Ab", "Ab-dur", "Abdur", "Abmaj"],
+      "variations": [
+        { "type": "standard", "frets": [4, 6, 6, 5, 4, 4], "label_below": "Ab", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [4, 6, 6, "x", "x", "x"], "label_below": "Ab5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 11, 13, 13, "x", "x"], "label_below": "Ab5/Eb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 5, 4, 4], "label_below": "Ab", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Ab_Minor": {
+      "aliases": ["Abm", "Ab-mol", "Abmol", "Abmin"],
+      "variations": [
+        { "type": "standard", "frets": [4, 6, 6, 4, 4, 4], "label_below": "Abm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": [4, 6, 6, "x", "x", "x"], "label_below": "Ab5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": ["x", 11, 13, 13, "x", "x"], "label_below": "Ab5/Eb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 4, 4, 4], "label_below": "Abm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "A_Major": {
+      "aliases": ["A", "A-dur", "Adur", "Amaj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 0, 2, 2, 2, 0], "label_below": "A", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 0, 2, 2, "x", "x"], "label_below": "A5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [5, 7, 7, "x", "x", "x"], "label_below": "A5/E", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [0, 0, 2, "x", "x", "x"], "label_below": "A5/E", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 2, 0], "label_below": "A", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 14, 14, 12], "label_below": "A", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "A_Minor": {
+      "aliases": ["Am", "A-mol", "Amol", "Amin"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 0, 2, 2, 1, 0], "label_below": "Am", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 0, 2, 2, "x", "x"], "label_below": "A5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [5, 7, 7, "x", "x", "x"], "label_below": "A5/E", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [0, 0, 2, "x", "x", "x"], "label_below": "A5/E", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 2, 1, 0], "label_below": "Am", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 14, 13, 12], "label_below": "Am", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Bb_Major": {
+      "aliases": ["Bb", "Bb-dur", "Bbdur", "Bbmaj"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 1, 3, 3, 3, 1], "label_below": "Bb", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 1, 3, 3, "x", "x"], "label_below": "Bb5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [6, 8, 8, "x", "x", "x"], "label_below": "Bb5/F", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [1, 1, 3, "x", "x", "x"], "label_below": "Bb5/F", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 3, 3, 1], "label_below": "Bb", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "Bb_Minor": {
+      "aliases": ["Bbm", "Bb-mol", "Bbmol", "Bbmin"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 1, 3, 3, 2, 1], "label_below": "Bbm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 1, 3, 3, "x", "x"], "label_below": "Bb5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [6, 8, 8, "x", "x", "x"], "label_below": "Bb5/F", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [1, 1, 3, "x", "x", "x"], "label_below": "Bb5/F", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 3, 2, 1], "label_below": "Bbm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "B_Major": {
+      "aliases": ["B", "B-dur", "Bdur", "Bmaj", "H", "H-dur", "Hdur"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 2, 4, 4, 4, 2], "label_below": "B", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 2, 4, 4, "x", "x"], "label_below": "B5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [7, 9, 9, "x", "x", "x"], "label_below": "B5/F#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [2, 2, 4, "x", "x", "x"], "label_below": "B5/F#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 4, 4, 2], "label_below": "B", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 16, 16, 14], "label_below": "B", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    },
+    "B_Minor": {
+      "aliases": ["Bm", "B-mol", "Bmol", "Bmin", "Hm", "H-mol", "Hmol"],
+      "variations": [
+        { "type": "standard", "frets": ["x", 2, 4, 4, 3, 2], "label_below": "Bm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power", "frets": ["x", 2, 4, 4, "x", "x"], "label_below": "B5", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [7, 9, 9, "x", "x", "x"], "label_below": "B5/F#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "power_inv", "frets": [2, 2, 4, "x", "x", "x"], "label_below": "B5/F#", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 4, 3, 2], "label_below": "Bm", "svg_config": {"fill": "white", "stroke": "black"} },
+        { "type": "mini", "frets": ["x", "x", "x", 16, 15, 14], "label_below": "Bm", "svg_config": {"fill": "white", "stroke": "black"} }
+      ]
+    }
+  }
+}

@@ -779,3 +779,110 @@
         clear: left !important;
     }
 }
+
+.mode-guitar .notation-grid td, .mode-guitar .notation-grid th {
+    height: 160px;
+}
+
+.mode-guitar .notation-grid .counter-row td {
+    height: 30px;
+}
+
+.mode-guitar .cell-content {
+    width: 100%;
+    height: auto;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    background: transparent;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
+    pointer-events: auto;
+}
+
+/* Guitar Mode Styles */
+.guitar-cell-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 2px;
+    box-sizing: border-box;
+    cursor: text;
+}
+
+.guitar-chord-container {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+    margin-top: -4px; /* Pull up closer to note name */
+    overflow: hidden;
+}
+
+.guitar-chord-container svg {
+    width: 100%;
+    height: 100%;
+    max-width: 150px;
+    max-height: 150px;
+    display: block;
+}
+
+.inversion-indicator {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    z-index: 3;
+    font-size: 10px;
+    color: #f97316; /* Orange */
+    font-weight: bold;
+}
+
+.guitar-controls {
+    position: absolute;
+    bottom: 20px;
+    z-index: 10; /* Top of stack */
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.guitar-cell-wrapper:hover .guitar-controls {
+    opacity: 1;
+}
+
+.guitar-btn {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.guitar-btn:hover {
+    background: #e0e0e0;
+}
+
+@media print {
+    .guitar-controls {
+        display: none !important;
+    }
+    .inversion-indicator {
+        display: none !important;
+    }
+    .guitar-chord-container {
+        max-width: 100px; /* Larger in print */
+    }
+}

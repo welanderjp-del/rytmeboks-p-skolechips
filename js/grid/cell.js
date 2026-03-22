@@ -1,5 +1,6 @@
 import { getState, updateCell, setActiveField } from '../state.js';
 import { saveToLocalStorage } from '../storage.js';
+import { renderGuitarChord, getVariationCount } from './guitarChordRenderer.js';
 
 const NOTE_COLORS = {
     'C': 'note-c',
@@ -137,6 +138,7 @@ export function createCell(boxId, r, c) {
 
     content.addEventListener('input', (e) => {
         const text = e.target.textContent;
+        
         // Update color dynamically without re-rendering
         content.className = 'cell-content';
         // Also clear note classes from td
@@ -150,6 +152,36 @@ export function createCell(boxId, r, c) {
             td.classList.add(newNoteClass);
         }
         updateFontSize(e.target);
+
+        // Auto-render guitar chord on type
+        if (state.mode === 'guitar') {
+            const chordContainer = wrapper.querySelector('.guitar-chord-container');
+            const indicator = wrapper.querySelector('.inversion-indicator');
+            const controls = wrapper.querySelector('.guitar-controls');
+            
+            if (chordContainer) {
+                chordContainer.innerHTML = '';
+                const result = renderGuitarChord(chordContainer, text, 0); // Reset to first variation on type
+                
+                // Sync state without re-rendering to keep inversion in sync with visual reset
+                updateCell(boxId, r, c, { text, inversion: 0 }, true);
+
+                if (result) {
+                    const variationCount = result.variationCount;
+                    if (indicator) {
+                        indicator.textContent = `1/${variationCount}`;
+                        indicator.style.display = variationCount > 1 ? 'block' : 'none';
+                    }
+                    if (controls) controls.style.display = 'flex';
+                } else {
+                    if (indicator) {
+                        indicator.textContent = '';
+                        indicator.style.display = 'none';
+                    }
+                    if (controls) controls.style.display = 'none';
+                }
+            }
+        }
     });
 
     content.addEventListener('focus', () => {
@@ -157,7 +189,7 @@ export function createCell(boxId, r, c) {
     });
 
     content.addEventListener('blur', (e) => {
-        const text = e.target.textContent;
+        const text = e.target.textContent.trim();
         const currentState = getState();
         
         // Only clear if the active cell in state is still THIS cell
@@ -171,8 +203,8 @@ export function createCell(boxId, r, c) {
         }
 
         // Only update if text actually changed to avoid unnecessary re-renders
-        if (text !== cellData.text) {
-            updateCell(boxId, r, c, { text }, true);
+        if (text !== cellData.text.trim()) {
+            updateCell(boxId, r, c, { text, inversion: 0 }, true);
             saveToLocalStorage();
         }
     });
@@ -202,39 +234,65 @@ export function createCell(boxId, r, c) {
         }
     });
 
+    // Make entire cell clickable in guitar mode
+    if (state.mode === 'guitar') {
+        wrapper.addEventListener('click', () => {
+            content.focus();
+        });
+    }
+
     wrapper.appendChild(content);
 
     if (state.mode === 'guitar') {
+        const chordContainer = document.createElement('div');
+        chordContainer.className = 'guitar-chord-container';
+        
+        const result = renderGuitarChord(chordContainer, cellData.text, cellData.inversion);
+        const variationCount = result ? result.variationCount : 1;
+
         const indicator = document.createElement('div');
         indicator.className = 'inversion-indicator';
-        indicator.textContent = `${cellData.inversion + 1}/4`;
+        indicator.textContent = result ? `${cellData.inversion + 1}/${variationCount}` : '';
+        indicator.style.display = (result && variationCount > 1) ? 'block' : 'none';
         
         const controls = document.createElement('div');
         controls.className = 'guitar-controls';
+        controls.style.display = result ? 'flex' : 'none';
         
         const prevBtn = document.createElement('button');
         prevBtn.className = 'guitar-btn';
         prevBtn.textContent = '◀';
-        prevBtn.addEventListener('click', () => {
-            const newInv = (cellData.inversion - 1 + 4) % 4;
-            updateCell(boxId, r, c, { inversion: newInv });
-            indicator.textContent = `${newInv + 1}/4`;
+        prevBtn.addEventListener('mousedown', (e) => {
+            e.preventDefault(); // Prevent blur on content
+            e.stopPropagation();
+            const currentText = content.textContent.trim();
+            const currentBox = getState().boxes.find(b => b.id === boxId);
+            const currentInversion = currentBox.gridData[r][c].inversion;
+            const currentVariationCount = getVariationCount(currentText) || 1;
+            const newInv = (currentInversion - 1 + currentVariationCount) % currentVariationCount;
+            updateCell(boxId, r, c, { text: currentText, inversion: newInv });
             saveToLocalStorage();
         });
         
         const nextBtn = document.createElement('button');
         nextBtn.className = 'guitar-btn';
         nextBtn.textContent = '▶';
-        nextBtn.addEventListener('click', () => {
-            const newInv = (cellData.inversion + 1) % 4;
-            updateCell(boxId, r, c, { inversion: newInv });
-            indicator.textContent = `${newInv + 1}/4`;
+        nextBtn.addEventListener('mousedown', (e) => {
+            e.preventDefault(); // Prevent blur on content
+            e.stopPropagation();
+            const currentText = content.textContent.trim();
+            const currentBox = getState().boxes.find(b => b.id === boxId);
+            const currentInversion = currentBox.gridData[r][c].inversion;
+            const currentVariationCount = getVariationCount(currentText) || 1;
+            const newInv = (currentInversion + 1) % currentVariationCount;
+            updateCell(boxId, r, c, { text: currentText, inversion: newInv });
             saveToLocalStorage();
         });
         
         controls.appendChild(prevBtn);
         controls.appendChild(nextBtn);
         
+        wrapper.appendChild(chordContainer);
         wrapper.appendChild(indicator);
         wrapper.appendChild(controls);
     }

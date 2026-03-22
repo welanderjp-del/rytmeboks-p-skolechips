@@ -6,11 +6,19 @@ import { saveToLocalStorage } from '../storage.js';
 export function renderGrid() {
     const state = getState();
     const container = document.getElementById('app-container');
+    
+    if (!container) return;
     container.innerHTML = '';
 
-    // Apply layout class
+    if (!state.boxes || !Array.isArray(state.boxes)) {
+        console.warn('No boxes to render');
+        return;
+    }
+
+    // Apply layout and mode classes
     const layoutClass = state.layout === 'grid' ? 'layout-grid' : 'layout-column';
-    container.className = `flex-1 overflow-auto p-8 flex flex-col items-center bg-stone-200 print:bg-white print:p-0 ${layoutClass}`;
+    const modeClass = `mode-${state.mode}`;
+    container.className = `flex-1 overflow-auto p-8 flex flex-col items-center bg-stone-200 print:bg-white print:p-0 ${layoutClass} ${modeClass}`;
 
     // Dynamic pagination logic
     const pages = [];
@@ -21,8 +29,9 @@ export function renderGrid() {
     state.boxes.forEach((box, index) => {
         const isFirstOnPage = currentPage.length === 0;
         // More accurate height estimates:
-        // Header/Formled area (~32px) + Page Header (60px if first on page) + Counter (30px if first on page) + Rows (50px each)
-        const boxHeight = (isFirstOnPage ? 90 : 32) + (box.rows * 50);
+        // Header/Formled area (~32px) + Page Header (60px if first on page) + Counter (30px if first on page) + Rows (50px each, or 160px in guitar mode)
+        const rowHeight = state.mode === 'guitar' ? 160 : 50;
+        const boxHeight = (isFirstOnPage ? 90 : 32) + (box.rows * rowHeight);
         const boxWithIndex = { ...box, globalIndex: index };
         
         // Add dynamic gap to height calculation
@@ -268,7 +277,9 @@ export function renderGrid() {
                 
                 // Drum labels corner
                 if (state.mode === 'drum') {
-                    counterRow.appendChild(document.createElement('td'));
+                    const cornerTd = document.createElement('td');
+                    cornerTd.className = 'drum-label-cell';
+                    counterRow.appendChild(cornerTd);
                 }
 
                 const beatLabels = getBeatLabels(state.timeSignature);
@@ -418,8 +429,8 @@ export function renderGrid() {
         });
     }
     
-    // Restore focus if activeField exists and we are in column view
-    if (state.activeField && state.layout === 'column') {
+    // Restore focus if activeField exists
+    if (state.activeField) {
         let el = null;
         const { type } = state.activeField;
 

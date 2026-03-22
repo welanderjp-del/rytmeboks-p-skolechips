@@ -10,13 +10,18 @@ export const initialState = {
     activeField: null, // { type: 'cell'|'header'|'formled'|'drumLabel', ... }
     instrument: "",
     songTitle: "",
-    artist: ""
+    artist: "",
+    guitarChords: null
 };
 
 let state = { ...initialState };
 
 export function getState() {
     return state;
+}
+
+export function setGuitarChords(chords) {
+    setState({ guitarChords: chords });
 }
 
 export function setState(newState, skipEvent = false) {
@@ -27,7 +32,8 @@ export function setState(newState, skipEvent = false) {
 }
 
 export function resetState() {
-    const freshState = { ...initialState };
+    const currentChords = state.guitarChords;
+    const freshState = { ...initialState, guitarChords: currentChords };
     // Add one initial box
     const cols = getColsForSig(freshState.timeSignature);
     freshState.boxes = [createNewBox(freshState.globalRows, cols)];
@@ -181,6 +187,17 @@ export function setMode(mode) {
         if (state.globalRows === 1) {
             setGlobalRows(3);
         }
+    } else if (mode === 'guitar') {
+        const newBoxes = state.boxes.map(box => {
+            const drumLabels = [...box.drumLabels];
+            for (let i = 0; i < box.rows; i++) {
+                if (!drumLabels[i] || drumLabels[i].startsWith('Instrument ')) {
+                    drumLabels[i] = 'Akkord';
+                }
+            }
+            return { ...box, drumLabels };
+        });
+        setState({ mode, boxes: newBoxes });
     } else {
         setState({ mode });
     }
