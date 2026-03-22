@@ -751,13 +751,21 @@
 
     /* Thicker borders for zoomed out print to prevent disappearing lines */
     .layout-grid .notation-grid {
-        border-collapse: collapse !important;
-        border: 1.5pt solid #000 !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        border: none !important;
+        border-top: 1.5pt solid #000 !important;
+        border-left: 1.5pt solid #000 !important;
     }
     
     .layout-grid .notation-grid td, 
-    .layout-grid .notation-grid th {
-        border: 1.5pt solid #000 !important;
+    .layout-grid .notation-grid th,
+    .layout-grid .drum-label-cell, 
+    .layout-grid .marker-cell, 
+    .layout-grid .counter-row td {
+        border: none !important;
+        border-bottom: 1.5pt solid #000 !important;
+        border-right: 1.5pt solid #000 !important;
     }
 
     /* Force page break after every 4 pages */
