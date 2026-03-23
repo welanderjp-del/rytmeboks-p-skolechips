@@ -1,23 +1,25 @@
 import { getState } from '../state.js';
 
+let aliasMap = null;
+
+function getAliasMap(chordsData) {
+    if (aliasMap) return aliasMap;
+    aliasMap = new Map();
+    for (const [key, data] of Object.entries(chordsData)) {
+        data.aliases.forEach(alias => {
+            aliasMap.set(alias.toLowerCase(), data);
+        });
+    }
+    return aliasMap;
+}
+
 export function renderGuitarChord(container, chordName, variationIndex = 0) {
     const state = getState();
     const chordsData = state.guitarChords?.guitar_mode;
     if (!chordsData || !chordName) return null;
 
-    // Find chord by alias
-    let chordKey = null;
-    let foundChord = null;
-
     const searchName = chordName.trim().toLowerCase();
-
-    for (const [key, data] of Object.entries(chordsData)) {
-        if (data.aliases.some(alias => alias.toLowerCase() === searchName)) {
-            chordKey = key;
-            foundChord = data;
-            break;
-        }
-    }
+    const foundChord = getAliasMap(chordsData).get(searchName);
 
     if (!foundChord) return null;
 
@@ -142,10 +144,6 @@ export function getVariationCount(chordName) {
     if (!chordsData || !chordName) return 0;
 
     const searchName = chordName.trim().toLowerCase();
-    for (const data of Object.values(chordsData)) {
-        if (data.aliases.some(alias => alias.toLowerCase() === searchName)) {
-            return data.variations.length;
-        }
-    }
-    return 0;
+    const foundChord = getAliasMap(chordsData).get(searchName);
+    return foundChord ? foundChord.variations.length : 0;
 }

@@ -3,17 +3,17 @@ import { saveToLocalStorage } from '../storage.js';
 import { renderGuitarChord, getVariationCount } from './guitarChordRenderer.js';
 
 const NOTE_COLORS = {
-    'C': 'note-c',
     'C#': 'note-cs', 'DB': 'note-db',
-    'D': 'note-d',
+    'C': 'note-c',
     'D#': 'note-ds', 'EB': 'note-eb',
+    'D': 'note-d',
     'E': 'note-e',
+    'F#': 'note-gb', 'GB': 'note-gb',
     'F': 'note-f',
-    'F#': 'note-fs', 'GB': 'note-gb',
-    'G': 'note-g',
     'G#': 'note-gs', 'AB': 'note-ab',
-    'A': 'note-a',
+    'G': 'note-g',
     'A#': 'note-as', 'BB': 'note-bb',
+    'A': 'note-a',
     'B': 'note-b', 'H': 'note-h'
 };
 

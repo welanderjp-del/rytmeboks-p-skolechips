@@ -1,4 +1,4 @@
-import { getState, setMode, setTimeSignature, addBox, setGlobalRows, resetState, setLayout } from '../state.js';
+import { getState, setMode, setTimeSignature, addBox, setGlobalRows, resetState, setLayout, transposeAllChords } from '../state.js';
 import { renderGrid } from '../grid/grid.js';
 import { saveToLocalStorage, exportToJSON, importFromJSON } from '../storage.js';
 
@@ -40,6 +40,16 @@ export function initUI() {
     rowsInput.addEventListener('change', (e) => {
         const rows = parseInt(e.target.value);
         setGlobalRows(rows);
+        saveToLocalStorage();
+    });
+
+    // Transpose Buttons
+    document.getElementById('btn-transpose-up').addEventListener('click', () => {
+        transposeAllChords(1);
+        saveToLocalStorage();
+    });
+    document.getElementById('btn-transpose-down').addEventListener('click', () => {
+        transposeAllChords(-1);
         saveToLocalStorage();
     });
 

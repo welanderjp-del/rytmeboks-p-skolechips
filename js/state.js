@@ -1,3 +1,5 @@
+import { transposeChord } from './utils/transpose.js';
+
 export const initialState = {
     title: "Rytmeboks",
     mode: "normal", // normal, drum, guitar
@@ -29,6 +31,25 @@ export function setState(newState, skipEvent = false) {
     if (!skipEvent) {
         window.dispatchEvent(new CustomEvent('statechange', { detail: state }));
     }
+}
+
+export function transposeAllChords(semitones) {
+    const newBoxes = state.boxes.map(box => {
+        const newGridData = box.gridData.map(row => {
+            return row.map(cell => {
+                if (cell.text && cell.text.trim() !== "") {
+                    // Only transpose if it looks like a chord
+                    // Simple regex for chord-like strings: Starts with A-G or H (case-insensitive)
+                    if (/^[A-Ga-gHh]/.test(cell.text)) {
+                        return { ...cell, text: transposeChord(cell.text, semitones) };
+                    }
+                }
+                return cell;
+            });
+        });
+        return { ...box, gridData: newGridData };
+    });
+    setState({ boxes: newBoxes });
 }
 
 export function resetState() {
