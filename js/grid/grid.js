@@ -559,17 +559,16 @@ function renderRepeats(page, pageBoxes) {
     bracketContainer.className = 'repeat-bracket-container';
     page.appendChild(bracketContainer);
 
-    // Helper to get offset relative to the page element, ignoring transforms
+    // Helper to get offset relative to the page element
     const getOffsetRelativeToPage = (el) => {
-        let top = 0;
-        let left = 0;
-        let current = el;
-        while (current && current !== page) {
-            top += current.offsetTop;
-            left += current.offsetLeft;
-            current = current.offsetParent;
-        }
-        return { top, left };
+        const rect = el.getBoundingClientRect();
+        const pageRect = page.getBoundingClientRect();
+        return {
+            top: rect.top - pageRect.top,
+            left: rect.left - pageRect.left,
+            width: rect.width,
+            height: rect.height
+        };
     };
 
     const pageBoxIds = pageBoxes.map(b => b.id);
@@ -598,17 +597,29 @@ function renderRepeats(page, pageBoxes) {
             const startBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.startBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const startGrid = startBoxEl?.querySelector('.notation-grid');
             if (startGrid) {
-                const offset = getOffsetRelativeToPage(startGrid);
-                // Adjust by half a pixel to perfectly align with the outer edge of the grid border
-                top = offset.top - 0.5;
+                // Find the first rhythm cell (not a drum label, not in counter row)
+                const firstCell = startGrid.querySelector('tr:not(.counter-row) td:not(.drum-label-cell)');
+                if (firstCell) {
+                    const offset = getOffsetRelativeToPage(firstCell);
+                    top = offset.top;
+                } else {
+                    const offset = getOffsetRelativeToPage(startGrid);
+                    top = offset.top;
+                }
             }
         } else if (startIndex < firstBoxOnPageIndex) {
             // Starts on a previous page
             const firstBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[0]}"]`)?.closest('.rhythm-box-wrapper');
             const firstGrid = firstBoxEl?.querySelector('.notation-grid');
             if (firstGrid) {
-                const offset = getOffsetRelativeToPage(firstGrid);
-                top = offset.top - 0.5;
+                const firstCell = firstGrid.querySelector('tr:not(.counter-row) td:not(.drum-label-cell)');
+                if (firstCell) {
+                    const offset = getOffsetRelativeToPage(firstCell);
+                    top = offset.top;
+                } else {
+                    const offset = getOffsetRelativeToPage(firstGrid);
+                    top = offset.top;
+                }
             }
         }
 
@@ -616,17 +627,31 @@ function renderRepeats(page, pageBoxes) {
             const endBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.endBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const endGrid = endBoxEl?.querySelector('.notation-grid');
             if (endGrid) {
-                const offset = getOffsetRelativeToPage(endGrid);
-                // Adjust by half a pixel to perfectly align with the outer edge of the grid border
-                bottom = offset.top + endGrid.offsetHeight + 0.5;
+                // Find the last rhythm cell in the last row
+                const lastRow = endGrid.querySelector('tr:last-child');
+                const lastCell = lastRow ? lastRow.querySelector('td:last-child') : null;
+                if (lastCell) {
+                    const offset = getOffsetRelativeToPage(lastCell);
+                    bottom = offset.top + offset.height;
+                } else {
+                    const offset = getOffsetRelativeToPage(endGrid);
+                    bottom = offset.top + offset.height;
+                }
             }
         } else if (endIndex > lastBoxOnPageIndex) {
             // Ends on a later page
             const lastBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[pageBoxIds.length - 1]}"]`)?.closest('.rhythm-box-wrapper');
             const lastGrid = lastBoxEl?.querySelector('.notation-grid');
             if (lastGrid) {
-                const offset = getOffsetRelativeToPage(lastGrid);
-                bottom = offset.top + lastGrid.offsetHeight + 0.5;
+                const lastRow = lastGrid.querySelector('tr:last-child');
+                const lastCell = lastRow ? lastRow.querySelector('td:last-child') : null;
+                if (lastCell) {
+                    const offset = getOffsetRelativeToPage(lastCell);
+                    bottom = offset.top + offset.height;
+                } else {
+                    const offset = getOffsetRelativeToPage(lastGrid);
+                    bottom = offset.top + offset.height;
+                }
             }
         }
 
@@ -636,9 +661,23 @@ function renderRepeats(page, pageBoxes) {
             const sampleGrid = sampleBoxEl?.querySelector('.notation-grid');
             if (!sampleGrid) return;
             
-            const offset = getOffsetRelativeToPage(sampleGrid);
-            const left = offset.left;
-            const right = left + sampleGrid.offsetWidth;
+            // Get horizontal position from rhythm cells to handle drum labels correctly
+            const firstCell = sampleGrid.querySelector('tr:not(.counter-row) td:not(.drum-label-cell)');
+            const lastRow = sampleGrid.querySelector('tr:last-child');
+            const lastCell = lastRow ? lastRow.querySelector('td:last-child') : null;
+            
+            let left, right;
+            if (firstCell && lastCell) {
+                const leftOffset = getOffsetRelativeToPage(firstCell);
+                const rightOffset = getOffsetRelativeToPage(lastCell);
+                left = leftOffset.left;
+                right = rightOffset.left + rightOffset.width;
+            } else {
+                const offset = getOffsetRelativeToPage(sampleGrid);
+                left = offset.left;
+                right = left + offset.width;
+            }
+            
             const height = bottom - top;
 
             // Left Bracket
@@ -647,7 +686,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) leftBracket.style.borderTop = 'none';
             if (!endsOnPage) leftBracket.style.borderBottom = 'none';
             leftBracket.style.top = `${top}px`;
-            leftBracket.style.left = `${left - 20}px`;
+            leftBracket.style.left = `${left - 12}px`;
             leftBracket.style.height = `${height}px`;
             bracketContainer.appendChild(leftBracket);
 
@@ -657,7 +696,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) rightBracket.style.borderTop = 'none';
             if (!endsOnPage) rightBracket.style.borderBottom = 'none';
             rightBracket.style.top = `${top}px`;
-            rightBracket.style.left = `${right + 5}px`;
+            rightBracket.style.left = `${right + 0}px`;
             rightBracket.style.height = `${height}px`;
             bracketContainer.appendChild(rightBracket);
 

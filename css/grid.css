@@ -217,18 +217,18 @@
 }
 
 /* Note Colors */
-.note-c { background-color: #D84C3E !important; }
-.note-cs, .note-db { background-color: #DE603E !important; }
-.note-d { background-color: #EA9F38 !important; }
-.note-ds, .note-eb { background-color: #F7CB45 !important; }
-.note-e { background-color: #FEF752 !important; }
-.note-f { background-color: #B8D242 !important; }
-.note-fs, .note-gb { background-color: #479B4D !important; }
-.note-g { background-color: #3D8A69 !important; }
-.note-gs, .note-ab { background-color: #2E6491 !important; }
-.note-a { background-color: #332D65 !important; }
-.note-as, .note-bb { background-color: #815084 !important; }
-.note-b, .note-h { background-color: #D15D92 !important; }
+.note-c { --note-bg: #D84C3E; background-color: var(--note-bg) !important; }
+.note-cs, .note-db { --note-bg: #DE603E; background-color: var(--note-bg) !important; }
+.note-d { --note-bg: #EA9F38; background-color: var(--note-bg) !important; }
+.note-ds, .note-eb { --note-bg: #F7CB45; background-color: var(--note-bg) !important; }
+.note-e { --note-bg: #FEF752; background-color: var(--note-bg) !important; }
+.note-f { --note-bg: #B8D242; background-color: var(--note-bg) !important; }
+.note-fs, .note-gb { --note-bg: #479B4D; background-color: var(--note-bg) !important; }
+.note-g { --note-bg: #3D8A69; background-color: var(--note-bg) !important; }
+.note-gs, .note-ab { --note-bg: #2E6491; background-color: var(--note-bg) !important; }
+.note-a { --note-bg: #332D65; background-color: var(--note-bg) !important; }
+.note-as, .note-bb { --note-bg: #815084; background-color: var(--note-bg) !important; }
+.note-b, .note-h { --note-bg: #D15D92; background-color: var(--note-bg) !important; }
 
 /* Empty cell should not have shadow if no text */
 .cell-content:empty {
@@ -642,17 +642,16 @@
         outline: none !important;
     }
 
-    /* Fix thicker border between 2nd and 3rd cell in print */
-    .notation-grid td:nth-child(3) {
-        border-right-width: 0.375pt !important;
-    }
+    /* Remove manual border adjustments that cause double thickness issues */
+    .notation-grid td:nth-child(3),
     .notation-grid td:nth-child(4) {
-        border-left-width: 0.375pt !important;
+        border-right-width: 0.75pt !important;
+        border-left-width: 0.75pt !important;
     }
 
-    /* Apply the inset shadow only to cells with background colors */
-    .notation-grid td[class*="note-"], .notation-grid td.cell-active {
-        box-shadow: inset 0 0 0 0.1pt #000 !important;
+    /* Remove the inset shadow that might be causing perceived double thickness */
+    .notation-grid td[class*="note-"] {
+        box-shadow: none !important;
     }
 
     /* Ensure specific cells follow the same border logic */
@@ -672,12 +671,14 @@
         box-shadow: none !important;
     }
     .cell-content {
-        text-shadow: none !important;
         color: white !important;
         font-weight: 900 !important;
-        /* Use stroke with paint-order to preserve geometry while having a strong outline */
-        -webkit-text-stroke: 1.5pt #000 !important;
-        paint-order: stroke fill !important;
+        /* Use a strong text-shadow for print instead of stroke to avoid "farve-match" confusion */
+        text-shadow: 
+            -1px -1px 0 #000,  
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000 !important;
     }
     /* Black text for better print contrast in non-colored cells */
     .cell-content:not(:empty) {
