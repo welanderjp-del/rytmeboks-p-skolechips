@@ -620,12 +620,10 @@
         box-sizing: border-box !important;
     }
     .notation-grid {
-        border-collapse: separate !important;
-        border-spacing: 0 !important;
+        border-collapse: collapse !important;
         width: 100% !important;
         table-layout: fixed !important;
-        border-top: 0.75pt solid #000 !important;
-        border-left: 0.75pt solid #000 !important;
+        border: 0.75pt solid #000 !important;
         margin: 0 !important;
         background-color: #fff !important;
         box-shadow: none !important;
@@ -634,21 +632,17 @@
         border: none !important;
     }
     .notation-grid td, .notation-grid th {
-        border: none !important;
-        border-bottom: 0.75pt solid #000 !important;
-        border-right: 0.75pt solid #000 !important;
+        border: 0.75pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: border-box !important; /* Extend background under border to eliminate white gaps */
+        background-clip: padding-box !important; /* Changed from border-box to ensure border is on top */
         outline: none !important;
     }
 
     /* Ensure specific cells follow the same border logic */
     .drum-label-cell, .marker-cell, .counter-row td {
-        border: none !important;
-        border-bottom: 0.75pt solid #000 !important;
-        border-right: 0.75pt solid #000 !important;
-        background-clip: border-box !important;
+        border: 0.75pt solid #000 !important;
+        background-clip: padding-box !important;
     }
 
     .notation-grid td[class*="note-"] {
@@ -751,11 +745,8 @@
 
     /* Thicker borders for zoomed out print to prevent disappearing lines */
     .layout-grid .notation-grid {
-        border-collapse: separate !important;
-        border-spacing: 0 !important;
-        border: none !important;
-        border-top: 1.5pt solid #000 !important;
-        border-left: 1.5pt solid #000 !important;
+        border-collapse: collapse !important;
+        border: 1.5pt solid #000 !important;
     }
     
     .layout-grid .notation-grid td, 
@@ -763,9 +754,7 @@
     .layout-grid .drum-label-cell, 
     .layout-grid .marker-cell, 
     .layout-grid .counter-row td {
-        border: none !important;
-        border-bottom: 1.5pt solid #000 !important;
-        border-right: 1.5pt solid #000 !important;
+        border: 1.5pt solid #000 !important;
     }
 
     /* Force page break after every 4 pages */

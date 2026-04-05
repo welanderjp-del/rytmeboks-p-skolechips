@@ -544,7 +544,19 @@ function renderRepeats(page, pageBoxes) {
     bracketContainer.className = 'repeat-bracket-container';
     page.appendChild(bracketContainer);
 
-    const pageRect = page.getBoundingClientRect();
+    // Helper to get offset relative to the page element, ignoring transforms
+    const getOffsetRelativeToPage = (el) => {
+        let top = 0;
+        let left = 0;
+        let current = el;
+        while (current && current !== page) {
+            top += current.offsetTop;
+            left += current.offsetLeft;
+            current = current.offsetParent;
+        }
+        return { top, left };
+    };
+
     const pageBoxIds = pageBoxes.map(b => b.id);
 
     state.repeats.forEach(repeat => {
@@ -570,23 +582,35 @@ function renderRepeats(page, pageBoxes) {
         if (startsOnPage) {
             const startBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.startBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const startGrid = startBoxEl?.querySelector('.notation-grid');
-            if (startGrid) top = startGrid.getBoundingClientRect().top - pageRect.top;
+            if (startGrid) {
+                const offset = getOffsetRelativeToPage(startGrid);
+                top = offset.top;
+            }
         } else if (startIndex < firstBoxOnPageIndex) {
             // Starts on a previous page
             const firstBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[0]}"]`)?.closest('.rhythm-box-wrapper');
             const firstGrid = firstBoxEl?.querySelector('.notation-grid');
-            if (firstGrid) top = firstGrid.getBoundingClientRect().top - pageRect.top;
+            if (firstGrid) {
+                const offset = getOffsetRelativeToPage(firstGrid);
+                top = offset.top;
+            }
         }
 
         if (endsOnPage) {
             const endBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.endBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const endGrid = endBoxEl?.querySelector('.notation-grid');
-            if (endGrid) bottom = endGrid.getBoundingClientRect().bottom - pageRect.top;
+            if (endGrid) {
+                const offset = getOffsetRelativeToPage(endGrid);
+                bottom = offset.top + endGrid.offsetHeight;
+            }
         } else if (endIndex > lastBoxOnPageIndex) {
             // Ends on a later page
             const lastBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[pageBoxIds.length - 1]}"]`)?.closest('.rhythm-box-wrapper');
             const lastGrid = lastBoxEl?.querySelector('.notation-grid');
-            if (lastGrid) bottom = lastGrid.getBoundingClientRect().bottom - pageRect.top;
+            if (lastGrid) {
+                const offset = getOffsetRelativeToPage(lastGrid);
+                bottom = offset.top + lastGrid.offsetHeight;
+            }
         }
 
         if (top !== undefined && bottom !== undefined) {
@@ -595,9 +619,9 @@ function renderRepeats(page, pageBoxes) {
             const sampleGrid = sampleBoxEl?.querySelector('.notation-grid');
             if (!sampleGrid) return;
             
-            const sampleRect = sampleGrid.getBoundingClientRect();
-            const left = sampleRect.left - pageRect.left;
-            const right = sampleRect.right - pageRect.left;
+            const offset = getOffsetRelativeToPage(sampleGrid);
+            const left = offset.left;
+            const right = left + sampleGrid.offsetWidth;
             const height = bottom - top;
 
             // Left Bracket

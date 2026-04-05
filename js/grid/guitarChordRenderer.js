@@ -7,7 +7,7 @@ function getAliasMap(chordsData) {
     aliasMap = new Map();
     for (const [key, data] of Object.entries(chordsData)) {
         data.aliases.forEach(alias => {
-            aliasMap.set(alias.toLowerCase(), data);
+            aliasMap.set(alias.toLowerCase(), { key, data });
         });
     }
     return aliasMap;
@@ -19,9 +19,10 @@ export function renderGuitarChord(container, chordName, variationIndex = 0) {
     if (!chordsData || !chordName) return null;
 
     const searchName = chordName.trim().toLowerCase();
-    const foundChord = getAliasMap(chordsData).get(searchName);
+    const entry = getAliasMap(chordsData).get(searchName);
 
-    if (!foundChord) return null;
+    if (!entry) return null;
+    const { key: chordKey, data: foundChord } = entry;
 
     // Get variation
     const variations = foundChord.variations;
@@ -144,6 +145,6 @@ export function getVariationCount(chordName) {
     if (!chordsData || !chordName) return 0;
 
     const searchName = chordName.trim().toLowerCase();
-    const foundChord = getAliasMap(chordsData).get(searchName);
-    return foundChord ? foundChord.variations.length : 0;
+    const entry = getAliasMap(chordsData).get(searchName);
+    return entry ? entry.data.variations.length : 0;
 }
