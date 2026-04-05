@@ -635,7 +635,9 @@
         border: 0.75pt solid #000 !important;
         padding: 0 !important;
         position: relative !important;
-        background-clip: padding-box !important; /* Changed from border-box to ensure border is on top */
+        background-clip: border-box !important;
+        /* Use a tiny inset shadow to eliminate sub-pixel gaps between background and border in print */
+        box-shadow: inset 0 0 0 0.1pt currentColor !important;
         outline: none !important;
     }
 
@@ -700,6 +702,8 @@
     }
     .repeat-bracket {
         border-width: 1.5pt !important;
+        /* Ensure brackets are on top of everything in print */
+        z-index: 9999 !important;
     }
     .repeat-count-input {
         border: none !important;

@@ -429,6 +429,21 @@ export function renderGrid() {
         });
     }
     
+    // Ensure repeats are recalculated for print
+    if (!window._printHandlerAdded) {
+        window.addEventListener('beforeprint', () => {
+            // Re-render repeats specifically for print layout
+            const currentState = getState();
+            if (currentState.layout === 'column') {
+                // We need the pages data, which is local to renderGrid. 
+                // For simplicity, let's just trigger a full render which will call renderRepeats.
+                // The browser will apply print styles before calculating offsets.
+                renderGrid();
+            }
+        });
+        window._printHandlerAdded = true;
+    }
+    
     // Restore focus if activeField exists
     if (state.activeField) {
         let el = null;
@@ -584,7 +599,8 @@ function renderRepeats(page, pageBoxes) {
             const startGrid = startBoxEl?.querySelector('.notation-grid');
             if (startGrid) {
                 const offset = getOffsetRelativeToPage(startGrid);
-                top = offset.top;
+                // Adjust by half a pixel to perfectly align with the outer edge of the grid border
+                top = offset.top - 0.5;
             }
         } else if (startIndex < firstBoxOnPageIndex) {
             // Starts on a previous page
@@ -592,7 +608,7 @@ function renderRepeats(page, pageBoxes) {
             const firstGrid = firstBoxEl?.querySelector('.notation-grid');
             if (firstGrid) {
                 const offset = getOffsetRelativeToPage(firstGrid);
-                top = offset.top;
+                top = offset.top - 0.5;
             }
         }
 
@@ -601,7 +617,8 @@ function renderRepeats(page, pageBoxes) {
             const endGrid = endBoxEl?.querySelector('.notation-grid');
             if (endGrid) {
                 const offset = getOffsetRelativeToPage(endGrid);
-                bottom = offset.top + endGrid.offsetHeight;
+                // Adjust by half a pixel to perfectly align with the outer edge of the grid border
+                bottom = offset.top + endGrid.offsetHeight + 0.5;
             }
         } else if (endIndex > lastBoxOnPageIndex) {
             // Ends on a later page
@@ -609,7 +626,7 @@ function renderRepeats(page, pageBoxes) {
             const lastGrid = lastBoxEl?.querySelector('.notation-grid');
             if (lastGrid) {
                 const offset = getOffsetRelativeToPage(lastGrid);
-                bottom = offset.top + lastGrid.offsetHeight;
+                bottom = offset.top + lastGrid.offsetHeight + 0.5;
             }
         }
 
