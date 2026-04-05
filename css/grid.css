@@ -637,22 +637,39 @@
         position: relative !important;
         background-clip: border-box !important;
         /* Use a tiny inset shadow to eliminate sub-pixel gaps between background and border in print */
-        box-shadow: inset 0 0 0 0.1pt currentColor !important;
+        /* Only apply to cells that might have background colors to avoid gray lines in empty/counter cells */
+        box-shadow: none !important;
         outline: none !important;
+    }
+
+    /* Fix thicker border between 2nd and 3rd cell in print */
+    .notation-grid td:nth-child(3) {
+        border-right-width: 0.375pt !important;
+    }
+    .notation-grid td:nth-child(4) {
+        border-left-width: 0.375pt !important;
+    }
+
+    /* Apply the inset shadow only to cells with background colors */
+    .notation-grid td[class*="note-"], .notation-grid td.cell-active {
+        box-shadow: inset 0 0 0 0.1pt #000 !important;
     }
 
     /* Ensure specific cells follow the same border logic */
     .drum-label-cell, .marker-cell, .counter-row td {
         border: 0.75pt solid #000 !important;
-        background-clip: padding-box !important;
+        background-clip: border-box !important;
     }
 
-    .notation-grid td[class*="note-"] {
+    /* Remove the redundant and conflicting shadow clear */
+    /* .notation-grid td[class*="note-"] {
         box-shadow: none !important;
-    }
+    } */
     
     .notation-grid .counter-row td {
         background-color: #f9f9f8 !important;
+        color: #000 !important;
+        box-shadow: none !important;
     }
     .cell-content {
         text-shadow: none !important;
