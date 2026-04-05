@@ -597,29 +597,16 @@ function renderRepeats(page, pageBoxes) {
             const startBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.startBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const startGrid = startBoxEl?.querySelector('.notation-grid');
             if (startGrid) {
-                // Find the first rhythm cell (not a drum label, not in counter row)
-                const firstCell = startGrid.querySelector('tr:not(.counter-row) td:not(.drum-label-cell)');
-                if (firstCell) {
-                    const offset = getOffsetRelativeToPage(firstCell);
-                    top = offset.top;
-                } else {
-                    const offset = getOffsetRelativeToPage(startGrid);
-                    top = offset.top;
-                }
+                const offset = getOffsetRelativeToPage(startGrid);
+                top = offset.top;
             }
         } else if (startIndex < firstBoxOnPageIndex) {
             // Starts on a previous page
             const firstBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[0]}"]`)?.closest('.rhythm-box-wrapper');
             const firstGrid = firstBoxEl?.querySelector('.notation-grid');
             if (firstGrid) {
-                const firstCell = firstGrid.querySelector('tr:not(.counter-row) td:not(.drum-label-cell)');
-                if (firstCell) {
-                    const offset = getOffsetRelativeToPage(firstCell);
-                    top = offset.top;
-                } else {
-                    const offset = getOffsetRelativeToPage(firstGrid);
-                    top = offset.top;
-                }
+                const offset = getOffsetRelativeToPage(firstGrid);
+                top = offset.top;
             }
         }
 
@@ -627,31 +614,16 @@ function renderRepeats(page, pageBoxes) {
             const endBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.endBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const endGrid = endBoxEl?.querySelector('.notation-grid');
             if (endGrid) {
-                // Find the last rhythm cell in the last row
-                const lastRow = endGrid.querySelector('tr:last-child');
-                const lastCell = lastRow ? lastRow.querySelector('td:last-child') : null;
-                if (lastCell) {
-                    const offset = getOffsetRelativeToPage(lastCell);
-                    bottom = offset.top + offset.height;
-                } else {
-                    const offset = getOffsetRelativeToPage(endGrid);
-                    bottom = offset.top + offset.height;
-                }
+                const offset = getOffsetRelativeToPage(endGrid);
+                bottom = offset.top + offset.height;
             }
         } else if (endIndex > lastBoxOnPageIndex) {
             // Ends on a later page
             const lastBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[pageBoxIds.length - 1]}"]`)?.closest('.rhythm-box-wrapper');
             const lastGrid = lastBoxEl?.querySelector('.notation-grid');
             if (lastGrid) {
-                const lastRow = lastGrid.querySelector('tr:last-child');
-                const lastCell = lastRow ? lastRow.querySelector('td:last-child') : null;
-                if (lastCell) {
-                    const offset = getOffsetRelativeToPage(lastCell);
-                    bottom = offset.top + offset.height;
-                } else {
-                    const offset = getOffsetRelativeToPage(lastGrid);
-                    bottom = offset.top + offset.height;
-                }
+                const offset = getOffsetRelativeToPage(lastGrid);
+                bottom = offset.top + offset.height;
             }
         }
 
@@ -686,7 +658,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) leftBracket.style.borderTop = 'none';
             if (!endsOnPage) leftBracket.style.borderBottom = 'none';
             leftBracket.style.top = `${top}px`;
-            leftBracket.style.left = `${left - 12}px`;
+            leftBracket.style.left = `${left - 20}px`;
             leftBracket.style.height = `${height}px`;
             bracketContainer.appendChild(leftBracket);
 
@@ -696,7 +668,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) rightBracket.style.borderTop = 'none';
             if (!endsOnPage) rightBracket.style.borderBottom = 'none';
             rightBracket.style.top = `${top}px`;
-            rightBracket.style.left = `${right + 0}px`;
+            rightBracket.style.left = `${right + 8}px`;
             rightBracket.style.height = `${height}px`;
             bracketContainer.appendChild(rightBracket);
 
