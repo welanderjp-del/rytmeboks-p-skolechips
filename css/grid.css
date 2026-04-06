@@ -441,6 +441,7 @@
     border: 2px solid #000;
     pointer-events: auto;
     width: 15px;
+    box-sizing: border-box;
 }
 
 .repeat-bracket.left {
