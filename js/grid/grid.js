@@ -597,30 +597,16 @@ function renderRepeats(page, pageBoxes) {
             const startBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.startBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const startGrid = startBoxEl?.querySelector('.notation-grid');
             if (startGrid) {
-                const firstRow = startGrid.querySelector('tr');
-                if (firstRow) {
-                    const rect = firstRow.getBoundingClientRect();
-                    const pageRect = page.getBoundingClientRect();
-                    top = Math.round(rect.top - pageRect.top);
-                } else {
-                    const offset = getOffsetRelativeToPage(startGrid);
-                    top = Math.round(offset.top);
-                }
+                const offset = getOffsetRelativeToPage(startGrid);
+                top = offset.top;
             }
         } else if (startIndex < firstBoxOnPageIndex) {
-            // Starts on a previous page
+            // Starts on a previous page - align to the top of the first grid on this page
             const firstBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[0]}"]`)?.closest('.rhythm-box-wrapper');
             const firstGrid = firstBoxEl?.querySelector('.notation-grid');
             if (firstGrid) {
-                const firstRow = firstGrid.querySelector('tr');
-                if (firstRow) {
-                    const rect = firstRow.getBoundingClientRect();
-                    const pageRect = page.getBoundingClientRect();
-                    top = Math.round(rect.top - pageRect.top);
-                } else {
-                    const offset = getOffsetRelativeToPage(firstGrid);
-                    top = Math.round(offset.top);
-                }
+                const offset = getOffsetRelativeToPage(firstGrid);
+                top = offset.top;
             }
         }
 
@@ -628,30 +614,16 @@ function renderRepeats(page, pageBoxes) {
             const endBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.endBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const endGrid = endBoxEl?.querySelector('.notation-grid');
             if (endGrid) {
-                const lastRow = endGrid.querySelector('tr:last-child');
-                if (lastRow) {
-                    const rect = lastRow.getBoundingClientRect();
-                    const pageRect = page.getBoundingClientRect();
-                    bottom = Math.round(rect.bottom - pageRect.top);
-                } else {
-                    const offset = getOffsetRelativeToPage(endGrid);
-                    bottom = Math.round(offset.top + offset.height);
-                }
+                const offset = getOffsetRelativeToPage(endGrid);
+                bottom = offset.top + offset.height;
             }
         } else if (endIndex > lastBoxOnPageIndex) {
-            // Ends on a later page
+            // Ends on a later page - align to the bottom of the last grid on this page
             const lastBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[pageBoxIds.length - 1]}"]`)?.closest('.rhythm-box-wrapper');
             const lastGrid = lastBoxEl?.querySelector('.notation-grid');
             if (lastGrid) {
-                const lastRow = lastGrid.querySelector('tr:last-child');
-                if (lastRow) {
-                    const rect = lastRow.getBoundingClientRect();
-                    const pageRect = page.getBoundingClientRect();
-                    bottom = Math.round(rect.bottom - pageRect.top);
-                } else {
-                    const offset = getOffsetRelativeToPage(lastGrid);
-                    bottom = Math.round(offset.top + offset.height);
-                }
+                const offset = getOffsetRelativeToPage(lastGrid);
+                bottom = offset.top + offset.height;
             }
         }
 
@@ -670,15 +642,21 @@ function renderRepeats(page, pageBoxes) {
             if (firstCell && lastCell) {
                 const leftOffset = getOffsetRelativeToPage(firstCell);
                 const rightOffset = getOffsetRelativeToPage(lastCell);
-                left = Math.round(leftOffset.left);
-                right = Math.round(rightOffset.left + rightOffset.width);
+                left = leftOffset.left;
+                right = rightOffset.left + rightOffset.width;
             } else {
                 const offset = getOffsetRelativeToPage(sampleGrid);
-                left = Math.round(offset.left);
-                right = Math.round(left + offset.width);
+                left = offset.left;
+                right = left + offset.width;
             }
             
-            const height = Math.round(bottom - top);
+            // Sub-pixel precision for height
+            let height = bottom - top;
+            
+            // Small correction for print borders
+            if (window.matchMedia('print').matches) {
+                height -= 0.5;
+            }
 
             // Left Bracket
             const leftBracket = document.createElement('div');
@@ -686,7 +664,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) leftBracket.style.borderTop = 'none';
             if (!endsOnPage) leftBracket.style.borderBottom = 'none';
             leftBracket.style.top = `${top}px`;
-            leftBracket.style.left = `${left - 18}px`;
+            leftBracket.style.left = `${left - 24}px`;
             leftBracket.style.height = `${height}px`;
             bracketContainer.appendChild(leftBracket);
 
@@ -696,7 +674,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) rightBracket.style.borderTop = 'none';
             if (!endsOnPage) rightBracket.style.borderBottom = 'none';
             rightBracket.style.top = `${top}px`;
-            rightBracket.style.left = `${right + 6}px`;
+            rightBracket.style.left = `${right + 12}px`;
             rightBracket.style.height = `${height}px`;
             bracketContainer.appendChild(rightBracket);
 
@@ -707,7 +685,7 @@ function renderRepeats(page, pageBoxes) {
                 countInput.contentEditable = true;
                 countInput.textContent = repeat.count;
                 countInput.style.top = `${top + height / 2}px`;
-                countInput.style.left = `${right + 20}px`;
+                countInput.style.left = `${right + 30}px`;
                 
                 countInput.addEventListener('blur', (e) => {
                     updateRepeat(repeat.id, { count: e.target.textContent.trim() });
