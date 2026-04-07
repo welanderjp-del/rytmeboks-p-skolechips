@@ -597,16 +597,30 @@ function renderRepeats(page, pageBoxes) {
             const startBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.startBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const startGrid = startBoxEl?.querySelector('.notation-grid');
             if (startGrid) {
-                const offset = getOffsetRelativeToPage(startGrid);
-                top = offset.top;
+                const firstRow = startGrid.querySelector('tr');
+                if (firstRow) {
+                    const rect = firstRow.getBoundingClientRect();
+                    const pageRect = page.getBoundingClientRect();
+                    top = Math.round(rect.top - pageRect.top);
+                } else {
+                    const offset = getOffsetRelativeToPage(startGrid);
+                    top = Math.round(offset.top);
+                }
             }
         } else if (startIndex < firstBoxOnPageIndex) {
             // Starts on a previous page
             const firstBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[0]}"]`)?.closest('.rhythm-box-wrapper');
             const firstGrid = firstBoxEl?.querySelector('.notation-grid');
             if (firstGrid) {
-                const offset = getOffsetRelativeToPage(firstGrid);
-                top = offset.top;
+                const firstRow = firstGrid.querySelector('tr');
+                if (firstRow) {
+                    const rect = firstRow.getBoundingClientRect();
+                    const pageRect = page.getBoundingClientRect();
+                    top = Math.round(rect.top - pageRect.top);
+                } else {
+                    const offset = getOffsetRelativeToPage(firstGrid);
+                    top = Math.round(offset.top);
+                }
             }
         }
 
@@ -614,16 +628,30 @@ function renderRepeats(page, pageBoxes) {
             const endBoxEl = page.querySelector(`.formled-input[data-box-id="${repeat.endBoxId}"]`)?.closest('.rhythm-box-wrapper');
             const endGrid = endBoxEl?.querySelector('.notation-grid');
             if (endGrid) {
-                const offset = getOffsetRelativeToPage(endGrid);
-                bottom = offset.top + offset.height;
+                const lastRow = endGrid.querySelector('tr:last-child');
+                if (lastRow) {
+                    const rect = lastRow.getBoundingClientRect();
+                    const pageRect = page.getBoundingClientRect();
+                    bottom = Math.round(rect.bottom - pageRect.top);
+                } else {
+                    const offset = getOffsetRelativeToPage(endGrid);
+                    bottom = Math.round(offset.top + offset.height);
+                }
             }
         } else if (endIndex > lastBoxOnPageIndex) {
             // Ends on a later page
             const lastBoxEl = page.querySelector(`.formled-input[data-box-id="${pageBoxIds[pageBoxIds.length - 1]}"]`)?.closest('.rhythm-box-wrapper');
             const lastGrid = lastBoxEl?.querySelector('.notation-grid');
             if (lastGrid) {
-                const offset = getOffsetRelativeToPage(lastGrid);
-                bottom = offset.top + offset.height;
+                const lastRow = lastGrid.querySelector('tr:last-child');
+                if (lastRow) {
+                    const rect = lastRow.getBoundingClientRect();
+                    const pageRect = page.getBoundingClientRect();
+                    bottom = Math.round(rect.bottom - pageRect.top);
+                } else {
+                    const offset = getOffsetRelativeToPage(lastGrid);
+                    bottom = Math.round(offset.top + offset.height);
+                }
             }
         }
 
@@ -642,15 +670,15 @@ function renderRepeats(page, pageBoxes) {
             if (firstCell && lastCell) {
                 const leftOffset = getOffsetRelativeToPage(firstCell);
                 const rightOffset = getOffsetRelativeToPage(lastCell);
-                left = leftOffset.left;
-                right = rightOffset.left + rightOffset.width;
+                left = Math.round(leftOffset.left);
+                right = Math.round(rightOffset.left + rightOffset.width);
             } else {
                 const offset = getOffsetRelativeToPage(sampleGrid);
-                left = offset.left;
-                right = left + offset.width;
+                left = Math.round(offset.left);
+                right = Math.round(left + offset.width);
             }
             
-            const height = bottom - top;
+            const height = Math.round(bottom - top);
 
             // Left Bracket
             const leftBracket = document.createElement('div');
@@ -658,7 +686,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) leftBracket.style.borderTop = 'none';
             if (!endsOnPage) leftBracket.style.borderBottom = 'none';
             leftBracket.style.top = `${top}px`;
-            leftBracket.style.left = `${left - 20}px`;
+            leftBracket.style.left = `${left - 18}px`;
             leftBracket.style.height = `${height}px`;
             bracketContainer.appendChild(leftBracket);
 
@@ -668,7 +696,7 @@ function renderRepeats(page, pageBoxes) {
             if (!startsOnPage) rightBracket.style.borderTop = 'none';
             if (!endsOnPage) rightBracket.style.borderBottom = 'none';
             rightBracket.style.top = `${top}px`;
-            rightBracket.style.left = `${right + 8}px`;
+            rightBracket.style.left = `${right + 6}px`;
             rightBracket.style.height = `${height}px`;
             bracketContainer.appendChild(rightBracket);
 

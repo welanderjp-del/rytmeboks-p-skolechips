@@ -723,6 +723,7 @@
         border-width: 1.5pt !important;
         /* Ensure brackets are on top of everything in print */
         z-index: 9999 !important;
+        box-sizing: border-box !important;
     }
     .repeat-count-input {
         border: none !important;
