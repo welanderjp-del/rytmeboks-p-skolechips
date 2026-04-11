@@ -653,9 +653,11 @@ function renderRepeats(page, pageBoxes) {
             // Sub-pixel precision for height
             let height = bottom - top;
             
-            // Small correction for print borders
+            // Small correction for print borders and general alignment
+            // Brackets tend to be slightly too low and too long in print
             if (window.matchMedia('print').matches) {
-                height -= 0.5;
+                top -= 1.2;
+                height -= 0.8;
             }
 
             // Left Bracket
