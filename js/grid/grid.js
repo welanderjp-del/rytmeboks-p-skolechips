@@ -561,13 +561,30 @@ function renderRepeats(page, pageBoxes) {
 
     // Helper to get offset relative to the page element
     const getOffsetRelativeToPage = (el) => {
-        const rect = el.getBoundingClientRect();
-        const pageRect = page.getBoundingClientRect();
+        let top = 0;
+        let left = 0;
+        let current = el;
+        
+        // Use offsetTop/Left for more stable print positioning relative to the page
+        while (current && current !== page) {
+            top += current.offsetTop;
+            left += current.offsetLeft;
+            current = current.offsetParent;
+        }
+
+        // Fallback to getBoundingClientRect if offset calculation failed
+        if (top === 0 && left === 0 && el !== page) {
+            const rect = el.getBoundingClientRect();
+            const pageRect = page.getBoundingClientRect();
+            top = rect.top - pageRect.top;
+            left = rect.left - pageRect.left;
+        }
+
         return {
-            top: rect.top - pageRect.top,
-            left: rect.left - pageRect.left,
-            width: rect.width,
-            height: rect.height
+            top: top,
+            left: left,
+            width: el.offsetWidth || el.getBoundingClientRect().width,
+            height: el.offsetHeight || el.getBoundingClientRect().height
         };
     };
 
@@ -654,10 +671,10 @@ function renderRepeats(page, pageBoxes) {
             let height = bottom - top;
             
             // Small correction for print borders and general alignment
-            // Brackets tend to be slightly too low and too long in print
+            // Brackets tend to be shifted too low and be too long in print
             if (window.matchMedia('print').matches) {
-                top -= 1.2;
-                height -= 0.8;
+                top -= 5.0;
+                height -= 1.0;
             }
 
             // Left Bracket
